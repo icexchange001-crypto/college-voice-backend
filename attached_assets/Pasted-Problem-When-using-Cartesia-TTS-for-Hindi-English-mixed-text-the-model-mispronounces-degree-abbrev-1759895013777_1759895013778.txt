@@ -1,0 +1,48 @@
+Problem:
+When using Cartesia TTS for Hindi/English mixed text, the model mispronounces degree abbreviations like BA, MA, PhD, BSc, MSc etc.
+For example, in this sentence:
+
+"Arts me BA, MA, aur PhD, Science me BSc, MSc, aur PhD"
+
+The TTS incorrectly says something like:
+
+"Arts me Bee Ay I, Em Ay I, aur Pee Aych Dee I..."
+
+— It adds an unwanted “I” sound after commas, because the comma pause is misinterpreted by the TTS engine.
+
+Cause:
+Cartesia’s TTS model often treats commas (,) as a continuation symbol instead of a short pause.
+This makes it pronounce a faint vowel sound (“I” or “E”) after abbreviations ending with a comma.
+
+Solution:
+Replace commas (,) after abbreviations with periods (.) or explicit pauses to create a natural stop instead of a continuation.
+This forces the TTS to take a short pause, resulting in correct pronunciation.
+
+Fixed Code Example:
+
+correctedText = correctedText.replace(/\bB\.Sc\./gi, 'Bee Dot Ess See.');
+correctedText = correctedText.replace(/\bM\.Sc\./gi, 'Em Dot Ess See.');
+correctedText = correctedText.replace(/\bB\.A\./gi, 'Bee Dot Ay.');
+correctedText = correctedText.replace(/\bM\.A\./gi, 'Em Dot Ay.');
+correctedText = correctedText.replace(/\bPh\.D\./gi, 'Pee Aych Dee.');
+correctedText = correctedText.replace(/\bB\.Com\./gi, 'Bee Dot Kom.');
+correctedText = correctedText.replace(/\bM\.Com\./gi, 'Em Dot Kom.');
+correctedText = correctedText.replace(/\bBCA\./gi, 'Bee See Ay.');
+correctedText = correctedText.replace(/\bPGDCA\./gi, 'Pee Jee Dee See Ay.');
+
+correctedText = correctedText.replace(/\bBSc\b/gi, 'Bee Ess See.');
+correctedText = correctedText.replace(/\bMSc\b/gi, 'Em Ess See.');
+correctedText = correctedText.replace(/\bBA\b/gi, 'Bee Ay.');
+correctedText = correctedText.replace(/\bMA\b/gi, 'Em Ay.');
+correctedText = correctedText.replace(/\bPhD\b/gi, 'Pee Aych Dee.');
+correctedText = correctedText.replace(/\bBCom\b/gi, 'Bee Kom.');
+correctedText = correctedText.replace(/\bMCom\b/gi, 'Em Kom.');
+correctedText = correctedText.replace(/\bBCA\b/gi, 'Bee See Ay.');
+correctedText = correctedText.replace(/\bPGDCA\b/gi, 'Pee Jee Dee See Ay.');
+
+
+✅ Result after fix:
+
+“Arts me Bee Ay. Em Ay. aur Pee Aych Dee. Science me Bee Ess See. Em Ess See. aur Pee Aych Dee.”
+
+Now the pronunciation is natural and the unwanted “I” sound disappears completely.

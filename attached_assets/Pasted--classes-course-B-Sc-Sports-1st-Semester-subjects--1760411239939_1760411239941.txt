@@ -1,0 +1,149 @@
+{
+  "classes": [
+    {
+      "course": "B.Sc. Sports - 1st Semester",
+      "subjects": [
+        {
+          "subject": "History & Foundation of Physical Education (Major)",
+          "teacher": "Mr. Satish Kumar",
+          "room": "Room-104",
+          "timing": "9:00 AM - 12:00 PM",
+          "days": ["Monday", "Wednesday", "Friday"]
+        },
+        {
+          "subject": "Health Education (Major)",
+          "teacher": "Dr. G. S. Bhola",
+          "room": "Room-104",
+          "timing": "9:00 AM - 12:00 PM",
+          "days": ["Tuesday", "Thursday", "Friday"]
+        },
+        {
+          "subject": "Anatomy & Physiology (Major)",
+          "teacher": "Mr. Vinay",
+          "room": "Room-104",
+          "timing": "9:00 AM - 12:00 PM",
+          "days": ["Monday", "Wednesday", "Thursday"]
+        },
+        {
+          "subject": "Olympic Movement (Minor)",
+          "teacher": "Mr. Vinay",
+          "room": "Room-104",
+          "timing": "9:00 AM - 12:00 PM",
+          "days": ["Tuesday", "Thursday"]
+        },
+        {
+          "subject": "Practical - Health Education",
+          "teacher": "Dr. G. S. Bhola",
+          "room": "Ground",
+          "timing": "9:00 AM - 11:00 AM",
+          "days": ["Wednesday", "Friday"]
+        },
+        {
+          "subject": "Practical - History & Foundation of Physical Education",
+          "teacher": "Dr. G. S. Bhola",
+          "room": "Ground",
+          "timing": "5:00 PM - 6:00 PM",
+          "days": ["Monday", "Thursday"]
+        },
+        {
+          "subject": "Practical - Anatomy & Physiology",
+          "teacher": "Mr. Vinay",
+          "room": "Ground",
+          "timing": "9:00 AM - 11:00 AM",
+          "days": ["Tuesday", "Friday"]
+        }
+      ]
+    },
+    {
+      "course": "B.Sc. Sports - 3rd Semester",
+      "subjects": [
+        {
+          "subject": "Fundamentals of Sports Training (Major)",
+          "teacher": "Mr. Satish Kumar",
+          "room": "R-109 / Room-104",
+          "timing": "9:00 AM - 10:00 AM",
+          "days": ["Monday", "Wednesday", "Thursday"]
+        },
+        {
+          "subject": "Sports Psychology (Major)",
+          "teacher": "Mr. Vinay",
+          "room": "R-116 / R-119",
+          "timing": "9:00 AM - 11:00 AM",
+          "days": ["Tuesday", "Friday"]
+        },
+        {
+          "subject": "Sports Nutrition (Major)",
+          "teacher": "Mr. Vinay",
+          "room": "Room-104",
+          "timing": "12:00 PM - 2:00 PM",
+          "days": ["Wednesday", "Friday"]
+        },
+        {
+          "subject": "Athletics Track & Field (Minor)",
+          "teacher": "Mr. Satish Kumar",
+          "room": "Room-104",
+          "timing": "12:00 PM - 2:00 PM",
+          "days": ["Tuesday", "Thursday"]
+        },
+        {
+          "subject": "Practical - Fundamentals of Sports Training",
+          "teacher": "Mr. Satish Kumar",
+          "room": "Ground",
+          "timing": "11:00 AM - 12:00 PM",
+          "days": ["Wednesday", "Friday"]
+        },
+        {
+          "subject": "Practical - Sports Psychology",
+          "teacher": "Mr. Vinay",
+          "room": "Ground",
+          "timing": "5:00 PM - 6:00 PM",
+          "days": ["Thursday"]
+        },
+        {
+          "subject": "Practical - Sports Nutrition",
+          "teacher": "Mr. Vinay",
+          "room": "Ground",
+          "timing": "5:00 PM - 6:00 PM",
+          "days": ["Monday"]
+        },
+        {
+          "subject": "Practical - Athletics Track & Field",
+          "teacher": "Mr. Satish Kumar",
+          "room": "Ground",
+          "timing": "11:00 AM - 12:00 PM",
+          "days": ["Tuesday"]
+        }
+      ]
+    }
+  ],
+  "rooms": {
+    "Room-104": "Physical Education Lecture Hall - Lala Lajpat Rai Bhawan",
+    "R-109": "Training Block - Room 109",
+    "R-116": "Training Block - Room 116",
+    "R-119": "Training Block - Room 119",
+    "Ground": "Sports Ground (Main Field)"
+  },
+  "teachers": [
+    {
+      "name": "Dr. G. S. Bhola",
+      "department": "Physical Education",
+      "cabin": "Faculty-PE-01",
+      "timing": "9:00 AM - 5:00 PM",
+      "subjects": ["Health Education", "History & Foundation of Physical Education"]
+    },
+    {
+      "name": "Mr. Satish Kumar",
+      "department": "Physical Education",
+      "cabin": "Faculty-PE-02",
+      "timing": "9:00 AM - 5:00 PM",
+      "subjects": ["Fundamentals of Sports Training", "Athletics Track & Field", "History & Foundation of Physical Education"]
+    },
+    {
+      "name": "Mr. Vinay",
+      "department": "Physical Education",
+      "cabin": "Faculty-PE-03",
+      "timing": "9:00 AM - 5:00 PM",
+      "subjects": ["Anatomy & Physiology", "Sports Psychology", "Sports Nutrition", "Olympic Movement"]
+    }
+  ]
+}

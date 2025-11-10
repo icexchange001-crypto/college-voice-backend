@@ -1,0 +1,55 @@
+💡 Section Title: “Smart Features of Re-Act”
+🤖 AI Assistant That Understands, Guides & Simplifies
+
+(👈 Left side: text + feature list)
+(👉 Right side: image/animation of AI assistant guiding with map + chat bubbles)
+
+Description (left side):
+Re-Act’s AI Assistant brings life to every large institution — guiding users in real-time through natural voice or chat.
+It’s more than a chatbot — it’s your digital guide who knows every corner, every room, and every process.
+
+✨ Key Features:
+
+🗣️ Voice-First Experience — Talk naturally and get instant, human-like guidance.
+
+🗺️ Smart Navigation — Provides step-by-step routes with live maps, room numbers, and directions.
+
+🧭 Context-Aware Help — Detects your location and tells you where to go, whom to meet, and what to do next.
+
+👩‍🏫 Student & Visitor Mode — Access class schedules, teacher info, and process details effortlessly.
+
+🏛️ Custom for Every Institution — Each organization gets its own AI assistant mapped to its unique structure.
+
+From classrooms to courtrooms — Re-Act brings clarity everywhere.
+
+🧠 For Institutions — An Intelligent Control System That Works Smarter
+
+(📊 Center-aligned paragraph block)
+(👇 Below: dashboard image showing analytics, controls, and automation)
+
+Description:
+Re-Act empowers institutions with a centralized, AI-powered control dashboard.
+Admins can manage data, monitor real-time activity, and automate repetitive work — all from one intuitive interface.
+Instant updates reflect across the assistant system, ensuring smooth operations and faster communication.
+
+Tagline (below paragraph):
+
+“From manual management to AI automation — Re-Act makes every process 10× faster.”
+
+🎨 Updated Layout (Assistant Image Right Side)
+[ SECTION TITLE ]
+----------------------------------------
+|   [ TEXT: Assistant Features ]   |   [ Assistant Image / Animation ]   |
+----------------------------------------
+|        [ Dashboard Description Paragraph ]        |
+|                 [ Dashboard Image / Mockup ]       |
+----------------------------------------
+
+
+Design Tip:
+
+Use fade-in from left animation for text and slide-in from right for image (Framer Motion recommended).
+
+Background subtle gradient: from-[#f8fafc] to-[#e8f0ff]
+
+Highlight keywords like “AI Assistant”, “Smart Navigation”, and “10× faster” in gradient or bold blue text.

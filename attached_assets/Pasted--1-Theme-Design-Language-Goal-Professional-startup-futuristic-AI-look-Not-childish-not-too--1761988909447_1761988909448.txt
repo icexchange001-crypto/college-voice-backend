@@ -1,0 +1,266 @@
+🎨 1) Theme & Design Language
+Goal
+
+Professional startup + futuristic AI look
+Not childish, not too tech-nerdy, not corporate dead.
+
+Primary color palette
+Purpose	Color
+Primary (buttons, highlights)	Electric Blue (#4169E1) or Neon Blue (#005BFF)
+Secondary	Royal Purple (#6C5CE7)
+Accent	Cyan glow (#00E5FF)
+Background	Very dark navy / near black (#0E0E15)
+Text	White (#FFFFFF) + Light gray (#CFCFCF)
+Style elements
+
+Soft neon glow, glassmorphism
+
+Smooth gradient background (blue + purple tint)
+
+Thin glowing borders
+
+Rounded corners
+
+Futuristic icons
+
+Smooth micro-animations (hover, fade in, zoom icons)
+
+Lines connecting features like “AI brain circuits” vibes
+
+Do NOT use
+
+Pure bright red
+
+Cartoon icons
+
+Too many big fonts
+
+Random emojis in UI
+
+🧱 2) Landing Page Structure
+✅ Navbar
+
+Left: Re-Act logo (animated pulse or orbit dot)
+Right links:
+
+Overview
+
+How it works
+
+Features
+
+Demo Experience
+
+Our Story
+
+Contact
+
+Rightmost button:
+Get Early Access (glowing blue pill button)
+
+Navbar transparent at first, then turns dark glass on scroll.
+
+✅ Hero Section
+
+Full-screen background:
+AI campus / city navigation animation video
+or blurred futuristic architecture + moving particles
+
+Center text:
+Big headline (bold):
+
+Navigate institutions like the world finally learned to speak.
+
+Sub-headline (medium):
+
+AI that guides every student, patient, visitor, and citizen with clarity, direction, and confidence.
+
+Buttons:
+Experience Live Demo (primary)
+How It Works (secondary outline/glass)
+
+Right side or below text:
+A short looping animation
+Example:
+A person asking “Room 25?” → system draws line → destination light pulses
+
+✅ Re-Act Overview Section
+
+White text on dark, clean layout.
+
+Headline: What is Re-Act?
+
+Paragraph:
+(Keep it smooth like a story, not robotic)
+
+Re-Act is an AI-powered institutional assistant that helps people instantly find rooms, departments, offices, services, and routes inside large campuses, courts, and hospitals.
+Just ask, speak, or type… and Re-Act guides you step-by-step with voice, text, map highlighting, and real-time building visuals.
+
+On right:
+Small animated logo / glowing sphere brain animation
+
+✅ Problem vs Chaos Section
+
+Left side: “The chaos today”
+Right side: “The clarity with Re-Act”
+
+Visual split screen.
+
+Text (left, problem bullets):
+
+People wander, ask, wait, get confused
+
+Notice boards, guards, reception not enough
+
+Time wasted, stress, inefficiency
+
+Images/videos left:
+Crowd lost in hospital/campus/court
+
+Text (right, solution bullets):
+
+Ask anything, get instant directions
+
+Voice + map + room detail
+
+Clear, confident navigation
+
+Works for students, patients & visitors
+
+Image/video right:
+Your recorded explanation video here.
+
+✅ How It Works Section
+
+Three step cards with icons + small animation lines
+
+Ask
+Voice or text: “Room 25?”
+Icon: mic + chat bubble
+
+Understand
+AI links rooms, departments, floors, buildings
+Icon: neural brain / chip
+
+Guide
+Voice + path on map + building photo
+Icon: map path glowing
+
+Button:
+Watch example navigation
+
+✅ Demo Preview Section
+
+Headline: See Re-Act in Action
+
+Left: Phone mockup showing your AI chat
+Right: Computer screen mockup showing building map demo
+
+Text below:
+
+Try a live campus demo or explore court navigation experience.
+
+Two buttons:
+Try Campus Demo
+Try Court Demo
+
+✅ Features Section
+
+Grid cards (3x2 or 2x3)
+
+Each card with icon + title + one-line text:
+
+Example features:
+
+Smart voice navigation
+
+Real-time map guidance
+
+Room & department lookup
+
+AI-connected admin panel
+
+Instant floor & building intelligence
+
+Adaptive instructions (walk, turn, floors)
+
+Photo-aided recognition
+
+Multi-institution support
+
+Modern icons. Glow on hover.
+
+✅ Admin Panel Section
+
+Headline: Powerful control for institutions
+
+Left: Screenshot of your admin UI
+Right text bullets:
+
+Manage rooms, buildings, departments
+
+AI assistant customization
+
+Real-time updates
+
+Manual or smart mapping
+
+Multi-mode access control
+
+Button: View Admin Demo
+
+✅ Who Built Re-Act section
+
+Headline: The Vision Behind The System
+
+Short founder story text
+Photos of you + team (tasteful, clean, professional)
+
+Lines like:
+
+Built with passion to eliminate confusion from real-world spaces
+Inspired by everyday chaos in campuses and hospitals
+
+✅ Contact / Join Us Section
+
+Headline: Join our mission
+Short text:
+
+We’re building a future where every institution communicates clearly.
+
+Email form + social links
+
+Button: Join Early Access
+
+✅ Footer
+
+Logo
+
+Links
+
+Copyright
+
+Mini tagline:
+
+Made with ambition in India. Built for the world.
+
+💡 Extra Micro-Suggestions
+Element	Style
+Button hover	Glow + slight lift
+Scroll animation	Fade + slide up
+Icons	Thin neon line style
+Background	Soft grid + moving dots
+Section separators	Light glowing gradient lines
+👑 Most Important: Storytelling Tone
+
+Your page should feel like:
+
+Apple launch meets
+
+Tesla innovation mindset meets
+
+Google Maps intelligence
+
+But built by a young revolution mind
+
+Avoid cringe, keep clean powerful sentences.

@@ -1,0 +1,133 @@
+8) Content Management / FAQs (Head-editable)
+
+Purpose: Quick Q&A and announcements that assistant can use.
+
+Features:
+
+Add/Edit/Delete FAQ entries (Question, Answer, Category)
+
+Categories: Timings, Documents, Directions (textual), Procedures, Announcements
+
+Option: Mark FAQ as Head-only editable (only designated heads or mini-admins can add)
+
+Announcements: pinned messages that assistant can read out (with expiry date)
+
+Usage: Assistant first checks FAQ for quick answers before calling external sources.
+
+9) Tickets & Unanswered Queries (Logs)
+
+Purpose: जहाँ वो queries जाएँ जो assistant ने नहीं सुलझाईं।
+
+Behavior:
+
+If assistant cannot answer (neither DB nor Google AI gives answer), the question is saved as an unanswered ticket.
+
+Ticket fields:
+
+Question text
+
+Timestamp
+
+Source (web / voice)
+
+Status (Pending / In Review / Resolved)
+
+Assigned to (main admin or mini-admin)
+
+Notes / Resolution
+
+Admin can convert a ticket into:
+
+FAQ entry
+
+Room/Staff addition (i.e., update DB)
+
+Mark resolved with note
+
+Analytics on this page:
+
+Number of unanswered tickets
+
+Filter by date / category
+
+“Most asked unanswered questions” (only show if repeated multiple times)
+
+10) Logs & Analytics (Limited)
+
+Focus: mainly unanswered questions and patterns.
+
+What to show:
+
+Total unanswered queries (count)
+
+Top 10 most repeated unanswered queries (frequency threshold to avoid duplicates)
+
+Recent ticket list (last 30 days)
+
+Export option (CSV) for tickets
+
+(Full analytics/dashboard charts can be added later)
+
+11) Settings & Logout
+
+Settings includes:
+
+Main admin change password
+
+System language default (Hindi/English)
+
+TTS configuration (voice on/off, prefer OpenAI TTS or browser)
+
+Backup / Export DB (basic)
+
+Feature toggles (enable/disable mini-admin creation)
+
+Logout: main logout. Mini-admins have logout on their mini panel.
+
+12) UI / UX Notes (Simple & Practical)
+
+Clean sidebar with sections: Dashboard / General Info / Buildings / Rooms / Departments / Mini-Admins / FAQs / Tickets / Logs / Settings / Logout
+
+Forms: validate required fields; friendly error messages
+
+Protect sensitive actions (view/regenerate mini credentials) with main admin password prompt
+
+Mobile-friendly basic layout for mini-admins
+
+Use consistent tone: Hindi UI labels + English placeholders (as you prefer)
+
+13) Data Flow Summary (how assistant uses admin data)
+
+Assistant first checks FAQ / Procedures for direct answers.
+
+For location queries, assistant checks Buildings → Rooms → Staff data.
+
+If info is missing, assistant creates a ticket automatically (visible in Tickets).
+
+Mini-admins can immediately fix missing data in their scope so future answers succeed.
+
+14) Acceptance Criteria (how to mark this done)
+
+Main admin can add Building and Room (room must be linked to a Building).
+
+Main admin can create Mini-Admin; system generates link + credentials; viewing these requires re-entering main admin password.
+
+Mini-admin can login to mini-panel and add/edit rooms within their assigned scope.
+
+FAQ entries can be added/edited and used by assistant for replies.
+
+Unanswered user queries are saved to Tickets with proper fields and can be resolved by admin.
+
+Settings allows toggling TTS and changing admin password.
+
+Logout works and mini-admin links are revoke-able.
+
+15) Security Notes (quick)
+
+Keep admin auth server-side, use hashed passwords.
+
+regenerating/viewing mini credentials must require re-authentication.
+
+Rate-limit ticket creation to avoid spam.
+
+Backup periodically.

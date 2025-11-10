@@ -1,0 +1,97 @@
+Part Titles — Admin-Panel Display Labels (Recommended)
+
+Basic College Details
+
+Tooltip: Official name, motto, establishment, affiliation, accreditation, principal, logo.
+
+Slug: basic_college_details
+
+Address & Contact
+
+Tooltip: Full postal address, map link, phone numbers, emails, website, office hours.
+
+Slug: address_contact
+
+About / History / Overview
+
+Tooltip: Short overview, detailed history, founder, vision & mission, core values.
+
+Slug: about_history_overview
+
+Administration & Management
+
+Tooltip: Principal, governing body, admin officers, committees, org chart.
+
+Slug: administration_management
+
+Admission & Eligibility
+
+Tooltip: Admission steps, eligibility, documents, fees overview, timelines, portals.
+
+Slug: admission_eligibility
+
+Scholarships & Financial Aid
+
+Tooltip: College scholarships, external schemes, eligibility, application/renewal process.
+
+Slug: scholarships_financial_aid
+
+Facilities & Infrastructure
+
+Tooltip: Library, labs, sports, hostel, canteen, medical, transport, auditorium, security.
+
+Slug: facilities_infrastructure
+
+Technical & Digital Resources
+
+Tooltip: ERP, OPAC, fee portal, attendance system, Wi-Fi, IT labs, LMS status.
+
+Slug: technical_digital_resources
+
+Student Support & Services
+
+Tooltip: Counseling, grievance, anti-ragging, women cell, SC/ST/OBC cell, placement, alumni.
+
+Slug: student_support_services
+
+Achievements & Recognitions
+
+Tooltip: NAAC grade, awards, grants, faculty & student achievements, notable alumni.
+
+Slug: achievements_recognitions
+
+Social Media & Online Presence
+
+Tooltip: Facebook, Instagram, X, LinkedIn, YouTube links and web profiles.
+
+Slug: social_media_online_presence
+
+Campus & Environment
+
+Tooltip: Campus area, buildings, green initiatives, safety, fire & emergency systems.
+
+Slug: campus_environment
+
+Gallery / Media
+
+Tooltip: Photos, videos, virtual tour, media assets and credits.
+
+Slug: gallery_media
+
+News & Announcements (Overview)
+
+Tooltip: Latest notices, announcement previews, link to full notices page.
+
+Slug: news_announcements
+
+Rules & Regulations
+
+Tooltip: Attendance policy, exam rules, dress code, hostel & disciplinary rules.
+
+Slug: rules_regulations
+
+Other / Miscellaneous
+
+Tooltip: Emergency contacts, holiday list, feedback form, lost & found, extra notes.
+
+Slug: other_miscellaneous

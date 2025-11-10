@@ -1,0 +1,167 @@
+🛠️ Developer Instructions — “General Information” Section Redesign
+🎯 Goal:
+
+Admin panel ke General Information section ko improve karna hai.
+Isme multiple sub-sections (parts) honge, jisse college ke har general detail ko category-wise add, edit, aur manage karna easy ho.
+
+🧩 Structure of General Information Section
+
+Main Menu:
+
+Dashboard → General Information
+
+Iske andar following sub-sections (parts) honge 👇
+
+1. 🏫 Basic Details
+
+Fields:
+
+College Name
+
+Affiliation / University
+
+Establishment Year
+
+Type (Government / Private / Autonomous)
+
+Principal Name
+
+Address
+
+Contact Number
+
+Email ID
+
+Official Website
+
+Working Hours
+
+Google Map Embed Link
+
+2. 🏛️ History & Overview
+
+Fields:
+
+Short Overview / Introduction
+
+Detailed History (rich text editor)
+
+Founder’s Information (Name, Bio, Image upload option)
+
+Important Achievements / Milestones (Add multiple items)
+
+3. 🧰 Facilities
+
+Fields:
+
+Library Details (name, capacity, features)
+
+Laboratories (add multiple labs)
+
+Sports Facilities
+
+Hostel Info (boys/girls, capacity, rules)
+
+Transport Facility
+
+Medical / First Aid
+
+Cafeteria
+
+Wi-Fi / IT Infrastructure
+
+Auditorium / Seminar Hall
+
+Other Key Facilities (add custom option)
+
+4. 💸 Admission & Scholarship
+
+Fields:
+
+Admission Process Overview
+
+Required Documents
+
+Important Dates (start, end, counselling)
+
+Eligibility Criteria
+
+Scholarship Programs (add multiple)
+
+Fee Structure Summary (PDF upload option)
+
+5. 🌐 Social Media & Online Presence
+
+Fields:
+
+Facebook Link
+
+Instagram Link
+
+YouTube Link
+
+LinkedIn Link
+
+X (Twitter) Link
+
+Official App Link (optional)
+
+6. 📰 News & Announcements
+
+Note: This part rahega, par limited overview ke liye.
+Fields:
+
+Total Active News Count (auto fetched)
+
+Link to Full News Section
+
+Option to highlight top 3 announcements (manual)
+
+7. 🧾 Quick Stats
+
+Fields:
+
+Total Students (auto or manual)
+
+Total Staff
+
+Total Departments
+
+Total Courses
+
+Campus Area
+
+Recognition & Accreditations (NAAC, UGC, etc.)
+
+🎨 Design Guidelines
+
+use best and professional design har sub part ka ander khol ka uska ander kaya kaya h dek saka har field ko edit delet krna ka option ho 
+
+Click karne par drawer panel ya modal open ho jaye jisme form fields hon.
+
+Har field ke liye validation (required fields, proper URL/email format).
+
+Use tab navigation ya accordion style UI agar single page me sab dikhana ho.
+
+Maintain consistent spacing, icons aur heading style (clean and minimal).
+
+Responsive design for tablet & desktop.
+
+⚙️ Functionality & Data Flow
+
+Add / Edit / Save:
+Admin kisi bhi part me jaake data add ya edit kar sake.
+Data save hone ke baad success toast show ho.
+
+Auto Categorization:
+Har part ke data ko backend me category ke name ke saath store karo.
+(e.g. general_info.basic_details, general_info.facilities, etc.)
+
+Search & Filter:
+Search bar add karo jisse admin specific field (like “library”, “scholarship”) search kar sake.(example ka liya ager ma fee search kru to muja result ma deka ki kaha par h ya part kis section ka subsection ka ander kaha sahi sa khula har related chij search sa and  search bar full advannce or inteligent hona chiya h )
+
+
+Modification Log:
+Optional — last updated date/time show karo har section ke neeche.
+
+and sab chijo ka data har chij assistant sa connect ho realtime ma apna ap poch jaya ya details uska pass 

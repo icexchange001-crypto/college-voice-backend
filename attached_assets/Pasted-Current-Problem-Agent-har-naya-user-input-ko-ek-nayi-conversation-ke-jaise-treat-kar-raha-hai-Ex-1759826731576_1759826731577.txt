@@ -1,0 +1,67 @@
+Current Problem:
+
+Agent har naya user input ko ek nayi conversation ke jaise treat kar raha hai.
+
+Example scenario:
+
+User: “Hello” → AI: “Hello!”
+
+User: “Courses btao” → AI: “Yahan kuch courses hain…”
+
+User: “Phir se btao” → AI: “Hello! Main ek assistant hoon…”
+
+Issue: AI previous conversation ko yaad nahi rakhta, jiski wajah se repeat ya context-dependent questions ka response irrelevant ya galat hota hai.
+
+Essentially, agent ke paas session-level memory missing hai.
+
+Goal / Requirement:
+
+Har user session ke liye conversation memory maintain karni hai.
+
+Agent har new user input ke saath pichle messages ka context LLM (Groq API) ko bheje.
+
+Memory short-term / session-level ho, optional: timeout ke saath auto-clear.
+
+TTS system (Cartesia / ElevenLabs) ke sath smoothly integrate ho.
+
+Existing project ka rest of setup same rahe, bas session-level memory add karna hai.
+
+Proposed Solution (High-Level Detail):
+
+Session Memory Store:
+
+In-memory data structure (Map/dictionary) ya koi lightweight storage har user ke liye conversation maintain kare.
+
+Har user ke messages (user + assistant) sequentially save honi chahiye.
+
+Memory limit: last 20–30 messages ya last 15 minutes activity tak.
+
+Contextual Requests to Groq:
+
+Har new user input ke saath, poora session conversation (recent messages) Groq API ko bhejna.
+
+Isse agent context-aware ho jayega aur “repeat” ya vague instructions properly samjhega.
+
+TTS Integration:
+
+LLM se mile reply ko turant TTS system me bhejna.
+
+Primary: Cartesia, Fallback: ElevenLabs.
+
+Session memory change se TTS workflow me koi interruption na ho, response sequence same rahe.
+
+Session Management / Cleanup (Optional but Recommended):
+
+Inactive sessions ko auto-clear karna (e.g., 15 min timeout) taaki memory leak na ho.
+
+Multiple simultaneous users ko support karne ke liye user-based session IDs maintain karna.
+
+Expected Benefits:
+
+Agent har session me context yaad rakhega, repeat questions ka proper response dega.
+
+TTS output ab bhi natural aur sequential rahega.
+
+Professional, scalable, aur lightweight memory implementation.
+
+Existing project architecture me minimal changes required, full compatibility maintained.

@@ -1,0 +1,81 @@
+⚙️ Concept: “AI Auto-Add Information”
+🧠 1. Process Flow (Simple Overview)
+
+Admin clicks “Add Information (AI Mode)”
+
+Ek text box aata hai jisme admin simple likhta hai:
+
+“Add info that the library now opens at 12 PM instead of 9 AM on working days.”
+
+AI is prompt ko samjhta hai aur auto-generate karta hai ek structured entry like:
+
+Title: Library Timings
+Category: Facilities
+Content: The library will now remain open from 12:00 PM to 5:00 PM on all working days.
+Tags: library, timings
+
+
+Ye entry automatically form fill karke “Add” button trigger karti hai (ya admin confirm karta hai → “Confirm & Add”).
+
+Final info ek professional formatted table/list me add ho jata hai under “General Information”.
+
+🧩 2. UI Design Suggestion
+🪄 Step 1 — Add Info Button
+[➕ Add Information]
+     ↳ (Dropdown)
+         • Manual Mode
+         • AI Mode (🧠 Smart Add)
+
+🧠 Step 2 — AI Mode Screen
+
+Box UI:
+
+🧠 Smart Add Information
+
+Describe what you want to add or update:
+----------------------------------------------------
+| e.g., Library timing changed to 12 PM.           |
+----------------------------------------------------
+
+[ Generate Entry ]
+
+----------------------------------------------------
+AI Output (Preview)
+Title: Library Timings
+Category: Facilities
+Content: The library will now remain open from 12 PM...
+----------------------------------------------------
+
+[ ✅ Confirm & Add ]     [ ✏️ Edit Before Add ]
+
+🧩 3. Backend Logic
+
+When admin submits the text:
+
+POST /api/ai-add-info
+{
+  "prompt": "Add info that library timing changed to 12 PM."
+}
+
+
+AI (using GPT API) parses and returns JSON:
+
+{
+  "title": "Library Timings",
+  "category": "Facilities",
+  "content": "The library will now remain open from 12:00 PM to 5:00 PM on all working days.",
+  "tags": ["library", "timings"]
+}
+
+
+Then your frontend auto-fills the form or adds the data directly to MongoDB/PostgreSQL.
+
+🧱 4. Display in “General Information” Page
+
+Use a professional table view:
+
+Title	Category	Content (short preview)	Last Updated	Added by	Actions
+Library Timings	Facilities	Library open 12–5 PM	17 Oct 2025	Admin	✏️ / 🗑
+Hostel Rules	Rules	Students must return...	16 Oct 2025	Admin	✏️ / 🗑
+
+Each row expandable for full details.

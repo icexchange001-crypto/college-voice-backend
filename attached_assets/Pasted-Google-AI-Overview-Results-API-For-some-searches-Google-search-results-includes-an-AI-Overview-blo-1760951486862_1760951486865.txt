@@ -1,0 +1,1380 @@
+Google AI Overview Results API
+For some searches, Google search results includes an AI Overview block. SerpApi is able to scrape, extract and make sense of this information.
+
+Currently, the AI Overview block is only seen for English searches (hl=en) with a limited range of countries (gl).
+
+
+Google sometimes requires an additional request to retrieve AI Overview results. See the extra request example and our Google AI Overview API to understand how to handle these cases.
+
+API Examples
+Typical result
+Typical result containing headings, paragraphs, lists (with and without title) and a thumbnail.
+
+GET
+
+
+https://serpapi.com/search.json?q=drop+shipping
+
+Code to integrate
+
+
+Ruby
+
+require "serpapi" 
+
+client = SerpApi::Client.new(
+  q: "drop shipping",
+  api_key: "12b09a2d54fc83d5ef2150dae766c541f68c3698393dd3b62a77aa30035e0043"
+)
+
+results = client.search
+ai_overview = results[:ai_overview]
+
+JSON Example
+
+{
+  ...
+  "ai_overview": {
+    "text_blocks": [
+      {
+        "type": "paragraph",
+        "snippet": "Drop shipping is a retail model where an online store doesn't keep products in stock. When a customer buys something, the store orders it from a third-party supplier who then ships it directly to the customer. This allows businesses to operate without managing inventory or warehouse space, reducing initial investment and overhead.",
+        "snippet_highlighted_words": [
+          "a retail model where an online store doesn't keep products in stock"
+        ],
+        "reference_indexes": [
+          0,
+          1,
+          3
+        ]
+      },
+      {
+        "type": "heading",
+        "snippet": "Here's a more detailed breakdown:"
+      },
+      {
+        "type": "list",
+        "list": [
+          {
+            "title": "No Inventory:",
+            "snippet": "Drop shippers sell products without holding any inventory themselves.",
+            "reference_indexes": [
+              1,
+              3
+            ]
+          },
+          {
+            "title": "Third-Party Fulfillment:",
+            "snippet": "They rely on a supplier (manufacturer, wholesaler, or another retailer) to handle warehousing, shipping, and fulfillment.",
+            "reference_indexes": [
+              2,
+              3
+            ]
+          },
+          {
+            "title": "Forwarding Orders:",
+            "snippet": "When a customer places an order, the drop shipper forwards it to their supplier, along with the shipping address.",
+            "reference_indexes": [
+              2,
+              3
+            ]
+          },
+          ...
+        ]
+      }
+    ],
+    "thumbnail": "https://serpapi.com/searches/66c53c7915afff0a2a48fc6c/images/ada462b58dfff08439da27aa82fde6c082293d76cc6e06be.png",
+    "references": [
+      {
+        "title": "Drop shipping - Wikipedia",
+        "link": "https://en.wikipedia.org/wiki/Drop_shipping",
+        "snippet": "Drop shipping is a form of retail business in which the seller accepts customer orders without keeping stock on hand. Instead, in ...",
+        "source": "Wikipedia",
+        "index": 0
+      },
+      {
+        "title": "Drop-Shipping: What you Need to Know Before You Buy or Sell Online",
+        "link": "https://www.michigan.gov/consumerprotection/protect-yourself/consumer-alerts/shopping/before-you-buy-or-sell-online",
+        "snippet": "What Is Drop-Shipping? Drop-shipping is when a person or company sells goods on their website that they do not keep in stock. When...",
+        "source": "State of Michigan (.gov)",
+        "index": 1
+      },
+      {
+        "title": "What is Dropshipping: A Comprehensive Guide for ... - FedEx",
+        "link": "https://www.fedex.com/en-us/small-business/articles-insights/what-is-drop-shipping.html#:~:text=Dropshipping%20is%20an%20online%20retail%20fulfillment%20method,the%20ordered%20products%20directly%20to%20the%20customer.",
+        "snippet": "Dropshipping is an online retail fulfillment method where a store doesn't keep the products it sells in stock. Instead, when a sto...",
+        "source": "FedEx",
+        "index": 2
+      },
+      ...
+    ]
+  },
+  ...
+}
+Example with a list containing thumbnails
+GET
+
+
+https://serpapi.com/search.json?q=successful+quotes
+
+Code to integrate
+
+
+Ruby
+
+require "serpapi" 
+
+client = SerpApi::Client.new(
+  q: "successful quotes",
+  api_key: "12b09a2d54fc83d5ef2150dae766c541f68c3698393dd3b62a77aa30035e0043"
+)
+
+results = client.search
+ai_overview = results[:ai_overview]
+
+JSON Example
+
+{
+  ...
+  "ai_overview": {
+    "text_blocks": [
+      {
+        "type": "heading",
+        "snippet": "Here are some quotes about success:",
+        "reference_indexes": [
+          1
+        ]
+      },
+      {
+        "type": "list",
+        "list": [
+          {
+            "title": "Albert Einstein",
+            "thumbnail": "https://serpapi.com/searches/66c5457015afff0a2878cb08/images/4585b9266b87a391ef0f171532560347a6cfec61ff8315f797ba8afa9c0d9c8975178708294e51b8caa9fb8d67d58629.jpeg",
+            "snippet": "\"Strive not to be a success, but rather to be of value\"",
+            "reference_indexes": [
+              1
+            ]
+          },
+          {
+            "title": "Nelson Mandela",
+            "thumbnail": "https://serpapi.com/searches/66c5457015afff0a2878cb08/images/4585b9266b87a391ef0f171532560347a6cfec61ff8315f7e12a7180e6485d05cd19174a2fed3bc740822f57ec6aba42.jpeg",
+            "snippet": "\"It always seems impossible until it's done\"",
+            "reference_indexes": [
+              1
+            ]
+          },
+          {
+            "title": "Herman Melville",
+            "thumbnail": "https://serpapi.com/searches/66c5457015afff0a2878cb08/images/4585b9266b87a391ef0f171532560347a6cfec61ff8315f78333d67ec3a028c0a7884df42a0dba573a24740ee1f0fe89.jpeg",
+            "snippet": "\"It is better to fail in originality than to succeed in imitation\"",
+            "reference_indexes": [
+              1,
+              6
+            ]
+          },
+          ...
+        ]
+      }
+    ],
+    "references": [
+      {
+        "title": "50 inspiring quotes about success",
+        "link": "https://www.canva.com/learn/quotes-about-success/#:~:text=I%20find%20that%20the%20harder%20I%20work%2C,I%20seem%20to%20have.%20%E2%80%94%20Thomas%20Jefferson.",
+        "snippet": "I find that the harder I work, the more luck I seem to have. — Thomas Jefferson.",
+        "source": "Canva",
+        "index": 0
+      },
+      {
+        "title": "125 Motivational Success Quotes for Business - Team Building",
+        "link": "https://teambuilding.com/blog/success-quotes",
+        "snippet": "Sep 27, 2022 — What are some good success quotes for work? ... “Strive not to be a success, but rather to be of value.” – Albert Eins...",
+        "source": "Team Building",
+        "index": 1
+      },
+      {
+        "title": "Life Quotes: 100+ Motivational Quotes To Inspire Your Positive ...",
+        "link": "https://www.forbesindia.com/article/explainers/motivational-quotes/84853/1#:~:text=%22The%20only%20place%20where%20success%20comes%20before,and%20learning%20from%20failure.%22%20%E2%80%94%20Colin%20Powell",
+        "snippet": "May 31, 2024 — \"The only place where success comes before work is in the dictionary.\" — Vince Lombardi; \"There are no secrets to succ...",
+        "source": "Forbes India",
+        "index": 2
+      },
+      ...
+    ]
+  },
+  ...
+}
+Example with nested lists
+GET
+
+
+https://serpapi.com/search.json?q=drop+shipping
+
+Code to integrate
+
+
+Ruby
+
+require "serpapi" 
+
+client = SerpApi::Client.new(
+  q: "drop shipping",
+  api_key: "12b09a2d54fc83d5ef2150dae766c541f68c3698393dd3b62a77aa30035e0043"
+)
+
+results = client.search
+ai_overview = results[:ai_overview]
+
+JSON Example
+
+{
+  ...
+  "ai_overview": {
+    "text_blocks": [
+      {
+        "type": "paragraph",
+        "snippet": "Drop shipping is a business model where a company sells products online without keeping them in stock. When a customer places an order, the company forwards the order and payment to a supplier or manufacturer, who then ships the product directly to the customer.",
+        "snippet_highlighted_words": [
+          "a business model where a company sells products online without keeping them in stock"
+        ],
+        "reference_indexes": [
+          0,
+          1,
+          2
+        ]
+      },
+      {
+        "type": "heading",
+        "snippet": "Here are some steps to start a dropshipping business:",
+        "reference_indexes": [
+          3
+        ]
+      },
+      {
+        "type": "list",
+        "list": [
+          {
+            "snippet": "Choose a niche",
+            "reference_indexes": [
+              3
+            ]
+          },
+          {
+            "snippet": "Find a supplier: When choosing a supplier, you can consider things like:",
+            "reference_indexes": [
+              3,
+              6
+            ],
+            "list": [
+              {
+                "snippet": "Profit margin: Whether the wholesale price is high enough to make a profit",
+                "reference_indexes": [
+                  6
+                ]
+              },
+              {
+                "snippet": "Handling fees: How these might affect your profit margin",
+                "reference_indexes": [
+                  6
+                ]
+              },
+              {
+                "snippet": "Shipping: Whether the supplier uses a service that provides tracking numbers",
+                "reference_indexes": [
+                  6
+                ]
+              },
+              {
+                "snippet": "Billing: Whether the supplier charges your credit card as soon as you submit an order",
+                "reference_indexes": [
+                  6
+                ]
+              }
+            ]
+          },
+          {
+            "snippet": "Build an online store",
+            "reference_indexes": [
+              3
+            ]
+          },
+          ...
+        ]
+      },
+      {
+        "type": "paragraph",
+        "snippet": "Some say that dropshipping can be a low-risk business model with lower running costs than other models. This can make it easier to become profitable faster, but the average dropshipper only makes between 10% and 30% compared to 50% to 70% for traditional e-commerce retailers.",
+        "reference_indexes": [
+          16,
+          17
+        ]
+      }
+    ],
+    "references": [
+      {
+        "title": "What Is Dropshipping and How Does It Work? (2024) - Shopify",
+        "link": "https://www.shopify.com/blog/what-is-dropshipping#:~:text=Dropshipping%20is%20a%20retail%20method,retail%20activities%20such%20as%20marketing.",
+        "snippet": "May 22, 2024 — Dropshipping is a retail method where an online store doesn't keep its products in stock. Instead, when a customer mak...",
+        "source": "Shopify",
+        "index": 0
+      },
+      {
+        "title": "Drop-Shipping: What you Need to Know Before You Buy or ...",
+        "link": "https://www.michigan.gov/consumerprotection/protect-yourself/consumer-alerts/shopping/before-you-buy-or-sell-online#:~:text=Drop%2Dshipping%20is%20when%20a%20person%2C%20or%20company%2C,are%20middlemen%2C%20they%20may%20charge%20more%20money.",
+        "snippet": "Drop-shipping is when a person, or company, sells goods on their website that they do not keep in stock. When an order is received...",
+        "source": "State of Michigan",
+        "index": 1
+      },
+      {
+        "title": "Is Dropshipping Legal? A Guide to the Legal Risks (2024) - Shopify",
+        "link": "https://www.shopify.com/blog/is-dropshipping-legal#:~:text=Yes%2C%20dropshipping%20is%20legal.,products%20directly%20to%20the%20customer.",
+        "snippet": "Jun 17, 2024 — Yes, dropshipping is legal. It is a widely used business model in which a retailer does not keep the products it sells...",
+        "source": "Shopify",
+        "index": 2
+      },
+      ...
+    ]
+  },
+  ...
+}
+Example with table
+GET
+
+
+https://serpapi.com/search.json?q=immune+related+adverse+events
+
+Code to integrate
+
+
+Ruby
+
+require "serpapi" 
+
+client = SerpApi::Client.new(
+  q: "immune related adverse events",
+  api_key: "12b09a2d54fc83d5ef2150dae766c541f68c3698393dd3b62a77aa30035e0043"
+)
+
+results = client.search
+ai_overview = results[:ai_overview]
+
+JSON Example
+
+{
+  ...
+  "ai_overview": {
+    "text_blocks": [
+      ...
+      {
+        "type": "table",
+        "table": [
+          [
+            "IrAE",
+            "Description"
+          ],
+          [
+            "Gastrointestinal",
+            "Diarrhea, gastrointestinal bleeding, and enterocolitis"
+          ],
+          [
+            "Pulmonary",
+            "Pneumonitis"
+          ],
+          [
+            "Hepatic",
+            "Hepatitis"
+          ],
+          [
+            "Endocrine",
+            "Thyroid dysfunction"
+          ],
+          [
+            "Dermatologic",
+            "Rash, vitiligo, and alopecia"
+          ]
+        ],
+        "detailed": [
+          [
+            {
+              "snippet": "IrAE"
+            },
+            {
+              "snippet": "Description"
+            }
+          ],
+          [
+            {
+              "snippet": "Gastrointestinal"
+            },
+            {
+              "snippet": "Diarrhea, gastrointestinal bleeding, and enterocolitis"
+            }
+          ],
+          [
+            {
+              "snippet": "Pulmonary"
+            },
+            {
+              "snippet": "Pneumonitis"
+            }
+          ],
+          [
+            {
+              "snippet": "Hepatic"
+            },
+            {
+              "snippet": "Hepatitis"
+            }
+          ],
+          [
+            {
+              "snippet": "Endocrine"
+            },
+            {
+              "snippet": "Thyroid dysfunction"
+            }
+          ],
+          [
+            {
+              "snippet": "Dermatologic"
+            },
+            {
+              "snippet": "Rash, vitiligo, and alopecia"
+            }
+          ]
+        ],
+        "formatted": [
+          {
+            "ir_ae": "Gastrointestinal",
+            "description": "Diarrhea, gastrointestinal bleeding, and enterocolitis"
+          },
+          {
+            "ir_ae": "Pulmonary",
+            "description": "Pneumonitis"
+          },
+          {
+            "ir_ae": "Hepatic",
+            "description": "Hepatitis"
+          },
+          {
+            "ir_ae": "Endocrine",
+            "description": "Thyroid dysfunction"
+          },
+          {
+            "ir_ae": "Dermatologic",
+            "description": "Rash, vitiligo, and alopecia"
+          }
+        ]
+      },
+      ...
+    ],
+    ...
+  },
+  ...
+}
+Example with
+LaTeX
+equations in the paragraph
+GET
+
+
+https://serpapi.com/search.json?engine=google_ai_overview&page_token=CpFBUnicxZTdcqpIEMev9x329nCTqKjgR6qorWGckDHiYfAj0RuKAA6KSCIK6N2-yz7VPs3OgEmIMamztRfbVTDQ0zPd_OdH__nXerkJ_v7td3-3e45varU0Tas0iujaqzpRWLPjw8apLaJ1vHX8P-ha2cfCfr_2lPQKAkwwxDZ5nB5dbb0f3JprT7s9Dm6ne_vRXM-hOna1W3H-qAv-WvE2wiFRmoITK6LgLZUWMjx7OOirldUgMLDxImv3EgmEPKNiPdmxt2IFZau4ZtXYLfjR7LGXalz1NlUMl_LUyBJDjqoNsd6p_qzZIQsA_93UL_wQIALAPRsJu05GAUCAOb4wgorQUdlJ3554uSjfA3InnpyvR_SUWlUxSO-sdpDq5elyde91Q4lnuQcp2xpq330hOd1pMaDzSHrp3fmU_Nzw7H0BBiChKh-4SXl9fKlK0WTypiNhM6vUTUcIXdSfK09XIVkE8NJ0bgHsx7MXka1HNZcyGMTa05YN9do25mjAcVeMtMNGdyeH9iJ9fuhZjtp-unuQzGXmVsT0OofOid-oi8vU3Xe9kHQffKkPqoOqWn9DDhMwDiYQF2LqrzqNcl6-M_z6wEqGFH6OzoUCkMXdmsSnRagIYiYGYSQW1gFoJsMIgtfjGpXup01UPsMPBUNgEsReIcqFxAQCqPJCAu5AfQAitoDyj1ELUO6AnjN0Ep4wptWEZZ0BDagkLT73kM-dkAOkOEO-b1mDPJbk2D8SHwFMJ0CbuTrLQ1__IazytOSUjjsnTKcOzXfnHh-DXqpS2imKGbFAph0PVQHiPxRFmLMZ8VkeM8uF1Vn2wQfkeNnqOeAlI6eYC79FyfAFxu6w3dBMSYrD7n68mPjomECoueYwHpETY1H49C9am_M_U5g3PobO1ByVKETfUEjQ6GPj4xT6bxT23iksGt85haigcMQbn8ob3yYtU4jeKYSa-k7hh8b3mcLc8UsU-mcU0hKF6GsKWeMrU5jQZ3Yu-Z4SFxZ-pvDXG9-FRn6yD40vh9Erho9dcL-i56Si5Ke66KCm4eFGw37sbbFhBb6RydAH19Yi3N3Y7vraWro3aqO_O7jCi5L9kFHjiu1wJV5fZflDXQjX20gR7XZPxI2-bPRm4nE-7k4rvSRs9-1jFMb6Lqw8jbMsNdzWSKek3W5ri6M-SIaTvnPsjeuV3j4UtcEsuZddQ4Z7KXM2d4axe3aWw6Zlz4mB6d6sb0QvtutiPw3lhZ6BhbW1umYwXeKWVKHOtpNmTTPoyMZwvu0lG2j2o7y4WFnolTnuNieDByCEW0dhJyAFYEgAEWLHtrw4Udy622h5YtNuubbcXLSEkO4Oz0pL-gdEpaR1
+
+Code to integrate
+
+
+Ruby
+
+require "serpapi" 
+
+client = SerpApi::Client.new(
+  engine: "google_ai_overview",
+  page_token: "CpFBUnicxZTdcqpIEMev9x329nCTqKjgR6qorWGckDHiYfAj0RuKAA6KSCIK6N2-yz7VPs3OgEmIMamztRfbVTDQ0zPd_OdH__nXerkJ_v7td3-3e45varU0Tas0iujaqzpRWLPjw8apLaJ1vHX8P-ha2cfCfr_2lPQKAkwwxDZ5nB5dbb0f3JprT7s9Dm6ne_vRXM-hOna1W3H-qAv-WvE2wiFRmoITK6LgLZUWMjx7OOirldUgMLDxImv3EgmEPKNiPdmxt2IFZau4ZtXYLfjR7LGXalz1NlUMl_LUyBJDjqoNsd6p_qzZIQsA_93UL_wQIALAPRsJu05GAUCAOb4wgorQUdlJ3554uSjfA3InnpyvR_SUWlUxSO-sdpDq5elyde91Q4lnuQcp2xpq330hOd1pMaDzSHrp3fmU_Nzw7H0BBiChKh-4SXl9fKlK0WTypiNhM6vUTUcIXdSfK09XIVkE8NJ0bgHsx7MXka1HNZcyGMTa05YN9do25mjAcVeMtMNGdyeH9iJ9fuhZjtp-unuQzGXmVsT0OofOid-oi8vU3Xe9kHQffKkPqoOqWn9DDhMwDiYQF2LqrzqNcl6-M_z6wEqGFH6OzoUCkMXdmsSnRagIYiYGYSQW1gFoJsMIgtfjGpXup01UPsMPBUNgEsReIcqFxAQCqPJCAu5AfQAitoDyj1ELUO6AnjN0Ep4wptWEZZ0BDagkLT73kM-dkAOkOEO-b1mDPJbk2D8SHwFMJ0CbuTrLQ1__IazytOSUjjsnTKcOzXfnHh-DXqpS2imKGbFAph0PVQHiPxRFmLMZ8VkeM8uF1Vn2wQfkeNnqOeAlI6eYC79FyfAFxu6w3dBMSYrD7n68mPjomECoueYwHpETY1H49C9am_M_U5g3PobO1ByVKETfUEjQ6GPj4xT6bxT23iksGt85haigcMQbn8ob3yYtU4jeKYSa-k7hh8b3mcLc8UsU-mcU0hKF6GsKWeMrU5jQZ3Yu-Z4SFxZ-pvDXG9-FRn6yD40vh9Erho9dcL-i56Si5Ke66KCm4eFGw37sbbFhBb6RydAH19Yi3N3Y7vraWro3aqO_O7jCi5L9kFHjiu1wJV5fZflDXQjX20gR7XZPxI2-bPRm4nE-7k4rvSRs9-1jFMb6Lqw8jbMsNdzWSKek3W5ri6M-SIaTvnPsjeuV3j4UtcEsuZddQ4Z7KXM2d4axe3aWw6Zlz4mB6d6sb0QvtutiPw3lhZ6BhbW1umYwXeKWVKHOtpNmTTPoyMZwvu0lG2j2o7y4WFnolTnuNieDByCEW0dhJyAFYEgAEWLHtrw4Udy622h5YtNuubbcXLSEkO4Oz0pL-gdEpaR1",
+  api_key: "12b09a2d54fc83d5ef2150dae766c541f68c3698393dd3b62a77aa30035e0043"
+)
+
+results = client.search
+ai_overview = results[:ai_overview]
+
+JSON Example
+
+{
+  ...
+  "ai_overview": {
+    "text_blocks": [
+      {
+        "type": "paragraph",
+        "snippet": "Assuming you want to solve the equation $x^{2}=0$, the solution is $\mathbf{x=0}$.",
+        "snippet_latex": [
+          "x^{2}=0",
+          "\mathbf{x=0}"
+        ]
+      },
+      {
+        "type": "paragraph",
+        "snippet": "To solve the equation $x^{2}=0$, you need to find the value of $x$ that, when multiplied by itself, equals zero. The only number that satisfies this condition is zero. $x^{2}=0$ $\sqrt{x^{2}}=\sqrt{0}$ $x=0$",
+        "snippet_latex": [
+          "x^{2}=0",
+          "x",
+          "x^{2}=0",
+          "\sqrt{x^{2}}=\sqrt{0}",
+          "x=0"
+        ]
+      }
+    ]
+  }
+}
+Example with
+LaTeX
+equations in the table
+GET
+
+
+https://serpapi.com/search.json?q=at+what+temperature+pressure+remaining+unchanged
+
+Code to integrate
+
+
+Ruby
+
+require "serpapi" 
+
+client = SerpApi::Client.new(
+  q: "at what temperature pressure remaining unchanged",
+  api_key: "12b09a2d54fc83d5ef2150dae766c541f68c3698393dd3b62a77aa30035e0043"
+)
+
+results = client.search
+ai_overview = results[:ai_overview]
+
+JSON Example
+
+{
+  ...
+  "ai_overview": {
+    "text_blocks": [
+      {
+        "type": "paragraph",
+        "snippet": "The root mean square (rms) velocity of hydrogen will double at a temperature of 819°C if the pressure remains unchanged:",
+        "snippet_highlighted_words": [
+          "819°C"
+        ]
+      },
+      {
+        "type": "table",
+        "table": [
+          [
+            "Step",
+            "Explanation"],
+          [
+            "1",
+            "Let v_{1} be the rms velocity at standard temperature and pressure (S.T.P.)"],
+          [
+            "2",
+            "Let v_{2} be the rms velocity at unknown temperature T_{2}"],
+          ],
+          ...
+        ],
+        "detailed": [
+          [
+            {
+              "snippet": "Step"
+            },
+            {
+              "snippet": "Explanation"
+            }
+          ],
+          [
+            {
+              "snippet": "1"
+            },
+            {
+              "snippet": "Let v_{1} be the rms velocity at standard temperature and pressure (S.T.P.)",
+              "snippet_latex": [
+                "v_{1}"
+              ]
+            }
+          ],
+          [
+            {
+              "snippet": "2"
+            },
+            {
+              "snippet": "Let v_{2} be the rms velocity at unknown temperature T_{2}",
+              "snippet_latex": [
+                "v_{2}",
+                "T_{2}"
+              ]
+            }
+          ],
+          ...
+        ],
+        "formatted": [
+          {
+            "step": "1",
+            "explanation": "Let v_{1} be the rms velocity at standard temperature and pressure (S.T.P.)"
+          },
+          {
+            "step": "2",
+            "explanation": "Let v_{2} be the rms velocity at unknown temperature T_{2}"
+          },
+          ...
+        ]
+      }
+    ],
+    ...
+  },
+  ...
+}
+Example with
+LaTeX
+equations in the list
+GET
+
+
+https://serpapi.com/search.json?q=why+rms+velocity+of+a+gas+doubles
+
+Code to integrate
+
+
+Ruby
+
+require "serpapi" 
+
+client = SerpApi::Client.new(
+  q: "why rms velocity of a gas doubles",
+  api_key: "12b09a2d54fc83d5ef2150dae766c541f68c3698393dd3b62a77aa30035e0043"
+)
+
+results = client.search
+ai_overview = results[:ai_overview]
+
+JSON Example
+
+{
+  ...
+  "ai_overview": {
+    "text_blocks": [
+      {
+        "type": "paragraph",
+        "snippet": "The root mean square (RMS) velocity of a gas doubles when the temperature of the gas quadruples. This is because the RMS velocity is directly proportional to the square root of the gas's temperature.",
+        "snippet_highlighted_words": [
+          "the RMS velocity is directly proportional to the square root of the gas's temperature"
+        ]
+      },
+      {
+        "type": "paragraph",
+        "snippet": "Explanation"
+      },
+      {
+        "type": "list",
+        "list": [
+          {
+            "snippet": "The RMS velocity is the square root of the average of the squares of the speeds of each molecule in a gas."
+          },
+          {
+            "snippet": "The RMS velocity is a key concept in understanding how gas molecules behave."
+          },
+          {
+            "snippet": "The RMS velocity of a gas is directly proportional to the square root of the gas's temperature in Kelvin T.",
+            "snippet_latex": [
+              "T"
+            ]
+          },
+          {
+            "snippet": "This relationship can be expressed mathematically as v_{rms}\\propto \\sqrt{T}",
+            "snippet_latex": [
+              "v_{rms}\\propto \\sqrt{T}"
+            ]
+          },
+          {
+            "snippet": "To double the RMS velocity, the temperature must quadruple."
+          }
+        ]
+      }
+    ],
+    ...
+  },
+  ...
+}
+Paragraph with video
+GET
+
+
+https://serpapi.com/search.json?q=how+does+android+work
+
+Code to integrate
+
+
+Ruby
+
+require "serpapi" 
+
+client = SerpApi::Client.new(
+  q: "how does android work",
+  api_key: "12b09a2d54fc83d5ef2150dae766c541f68c3698393dd3b62a77aa30035e0043"
+)
+
+results = client.search
+ai_overview = results[:ai_overview]
+
+JSON Example
+
+{
+  ...
+  "ai_overview": {
+    "text_blocks": [
+      ...
+      {
+        "type": "paragraph",
+        "snippet": "You can also watch this video to learn more about Android:",
+        "video": {
+          "link": "https://www.youtube.com/watch?v=Si2UR2gCq9M&t=92",
+          "thumbnail": "https://i.ytimg.com/vi/Si2UR2gCq9M/mqdefault.jpg?sqp=-oaymwEGCPgEEOQC&rs=AMzJL3n0e0ap28VMcvonPp-z2mhM1Y6r5A",
+          "source": "Google Open Source",
+          "date": "Feb 9, 2023"
+        }
+      }
+      ...
+    ],
+    ...
+  },
+  ...
+}
+Example with expandable sections
+GET
+
+
+https://serpapi.com/search.json?q=drop+shipping
+
+Code to integrate
+
+
+Ruby
+
+require "serpapi" 
+
+client = SerpApi::Client.new(
+  q: "drop shipping",
+  api_key: "12b09a2d54fc83d5ef2150dae766c541f68c3698393dd3b62a77aa30035e0043"
+)
+
+results = client.search
+ai_overview = results[:ai_overview]
+
+JSON Example
+
+{
+  ...
+  "ai_overview": {
+    "text_blocks": [
+      {
+        "type": "paragraph",
+        "snippet": "Dropshipping is a retail model where an online store doesn't keep products in stock, but instead forwards orders to a supplier who then ships the products directly to the customer. This model is popular with business owners because it outsources inventory management and order fulfillment, and can be profitable with lower running costs than other business models.",
+        "snippet_highlighted_words": [
+          "a retail model where an online store doesn't keep products in stock, but instead forwards orders to a supplier who then ships the products directly to the customer"
+        ],
+        "reference_indexes": [
+          0,
+          4,
+          7,
+          11
+        ]
+      },
+      {
+        "type": "expandable",
+        "title": "Starting a Dropshipping Business",
+        "subtitle": "Steps for launching a dropshipping venture",
+        "text_blocks": [
+          {
+            "type": "paragraph",
+            "snippet": "Here are some steps to start a dropshipping business:"
+          },
+          {
+            "type": "list",
+            "list": [
+              {
+                "snippet": "Choose a business concept"
+              },
+              {
+                "snippet": "Select products to sell"
+              },
+              {
+                "snippet": "Choose suppliers"
+              },
+              {
+                "snippet": "Build an online store"
+              },
+              {
+                "snippet": "Register your business"
+              },
+              {
+                "snippet": "Market your business and products",
+                "reference_indexes": [
+                  5
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "expandable",
+        "title": "Dropshipping Suppliers",
+        "subtitle": "Examples of companies that offer dropshipping services",
+        "text_blocks": [
+          {
+            "type": "paragraph",
+            "snippet": "Some dropshipping suppliers include:"
+          },
+          {
+            "type": "list",
+            "list": [
+              {
+                "snippet": "Spocket"
+              },
+              {
+                "snippet": "AliExpress Dropshipping"
+              },
+              {
+                "snippet": "Modalyst"
+              },
+              {
+                "snippet": "SaleHoo"
+              },
+              {
+                "snippet": "Doba"
+              },
+              {
+                "snippet": "Wholesale2B"
+              },
+              {
+                "snippet": "Worldwide Brands",
+                "reference_indexes": [
+                  8
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      ...
+    ],
+    "thumbnail": "https://serpapi.com/searches/66c53cd315afff0a2878caf0/images/20fdf62b7cc11067c251b1374115d7a3e2082bff823672e8.png",
+    "references": [
+      {
+        "title": "What Is Dropshipping and How Does It Work? (2024) - Shopify",
+        "link": "https://www.shopify.com/blog/what-is-dropshipping#:~:text=Dropshipping%20is%20a%20retail%20method,the%20product%20to%20the%20customer.",
+        "snippet": "May 22, 2024 — Dropshipping is a retail method where an online store doesn't keep its products in stock. Instead, when a customer mak...",
+        "source": "Shopify",
+        "index": 0
+      },
+      {
+        "title": "Drop shipping - Wikipedia",
+        "link": "https://en.wikipedia.org/wiki/Drop_shipping#:~:text=Amazon%2C%20the%20online%20shopping%20giant,customer%20using%20packaging%20from%20Amazon.",
+        "snippet": "Amazon, the online shopping giant, found early success in a dropshipping business model where they could offer over a million diff...",
+        "source": "Wikipedia",
+        "index": 1
+      },
+      {
+        "title": "What Is dropshipping? How does it work in 2024? - Sell on Amazon",
+        "link": "https://sell.amazon.com/learn/what-is-dropshipping#:~:text=For%20Amazon%20sellers%2C%20using%20a,and%20identify%20yourself%20as%20such.",
+        "snippet": "For Amazon sellers, using a dropshipping service is generally allowed by Amazon dropshipping policy, as long as you're the seller ...",
+        "source": "Sell on Amazon",
+        "index": 2
+      },
+      ...
+    ]
+  },
+  ...
+}
+Example of paragraph with
+snippet_links
+GET
+
+
+https://serpapi.com/search.json?q=explain+ruby+language
+
+Code to integrate
+
+
+Ruby
+
+require "serpapi" 
+
+client = SerpApi::Client.new(
+  q: "explain ruby language",
+  api_key: "12b09a2d54fc83d5ef2150dae766c541f68c3698393dd3b62a77aa30035e0043"
+)
+
+results = client.search
+ai_overview = results[:ai_overview]
+
+JSON Example
+
+{
+  ...
+  "ai_overview": {
+    "text_blocks": [
+      {
+        "type": "paragraph",
+        "snippet": "Ruby is an open-source, dynamically typed, interpreted programming language that prioritizes simplicity and productivity. It's known for its elegant and readable syntax, making it relatively easy to learn and use. Ruby is often used for web development, particularly with the popular Ruby on Rails framework, but also finds applications in data analysis and other areas.",
+        "snippet_highlighted_words": [
+          "an open-source, dynamically typed, interpreted programming language that prioritizes simplicity and productivity"
+        ],
+        "snippet_links": [
+          {
+            "text": "Ruby on Rails",
+            "link": "https://www.google.com/search?sca_esv=45c8bf4228d081b3&hl=en&gl=us&q=Ruby+on+Rails&sa=X&ved=2ahUKEwjU67mfy-yNAxUdCBAIHY9yECYQxccNegQICxAB"
+          },
+        ],
+        "reference_indexes": [
+          0,
+          4,
+          7,
+          11
+        ]
+      },
+      ...
+    ],
+    ...
+  },
+  ...
+}
+Example of list with
+snippet_links
+GET
+
+
+https://serpapi.com/search.json?q=explain+ruby+language
+
+Code to integrate
+
+
+Ruby
+
+require "serpapi" 
+
+client = SerpApi::Client.new(
+  q: "explain ruby language",
+  api_key: "12b09a2d54fc83d5ef2150dae766c541f68c3698393dd3b62a77aa30035e0043"
+)
+
+results = client.search
+ai_overview = results[:ai_overview]
+
+JSON Example
+
+{
+  ...
+  "ai_overview": {
+    "text_blocks": [
+      ...
+      {
+        "type": "heading",
+        "snippet": "Key Features:"
+      },
+      {
+        "type": "list",
+        "list": [
+          {
+            "title": "Object-Oriented:",
+            "link": "https://www.google.com/search?sca_esv=abfa54d360d79d5a&hl=en&gl=us&q=Object-Oriented&sa=X&ved=2ahUKEwjghIb87JGOAxXrhlYBHRcUAIgQxccNegQIPxAD",
+            "snippet": "Everything in Ruby is treated as an object, with features like single inheritance, mixins, and metaclasses.",
+            "snippet_links": [
+              {
+                "text": "metaclasses",
+                "link": "https://www.google.com/search?sca_esv=abfa54d360d79d5a&hl=en&gl=us&q=metaclasses&sa=X&ved=2ahUKEwjghIb87JGOAxXrhlYBHRcUAIgQxccNegQIPhAB"
+              }
+            ],
+            "reference_indexes": [
+              1
+            ]
+          },
+          {
+            "title": "Dynamic Typing:",
+            "link": "https://www.google.com/search?sca_esv=abfa54d360d79d5a&hl=en&gl=us&q=Dynamic+Typing&sa=X&ved=2ahUKEwjghIb87JGOAxXrhlYBHRcUAIgQxccNegQIQBAD",
+            "snippet": "You don't need to declare the data type of a variable, making it more flexible.",
+            "reference_indexes": [
+              1,
+              16
+            ]
+          },
+         ...
+        ],
+      },
+    }
+  ...
+}
+Example with products comaparison
+GET
+
+
+https://serpapi.com/search.json?q=iphone+16+vs+15
+
+Code to integrate
+
+
+Ruby
+
+require "serpapi" 
+
+client = SerpApi::Client.new(
+  q: "iphone 16 vs 15",
+  api_key: "12b09a2d54fc83d5ef2150dae766c541f68c3698393dd3b62a77aa30035e0043"
+)
+
+results = client.search
+ai_overview = results[:ai_overview]
+
+JSON Example
+
+{
+  ...
+  "ai_overview": {
+    "products": [
+      {
+        "thumbnail": "https://serpapi.com/searches/68496f27fe1c6b10a13f4f91/images/b92ecfbc4c7deb844c133ac2aa0d6589d046597f475651f4be1e3f20de8d3d970262af7ad7baaba8.webp",
+        "title": "Apple iPhone 16",
+        "rating": "4.7",
+        "reviews": "10K",
+        "price": "$0",
+        "extracted_price": 0,
+        "installments": "• $22mo × 36"
+      },
+      {
+        "thumbnail": "https://serpapi.com/searches/68496f27fe1c6b10a13f4f91/images/b92ecfbc4c7deb844c133ac2aa0d6589cd7413b35b3b2365df59602a18b3d20f68811ceeae1f2621.webp",
+        "title": "Apple iPhone 15",
+        "rating": "4.7",
+        "reviews": "28K",
+        "price": "$0",
+        "extracted_price": 0,
+        "installments": "• $29mo × 24"
+      }
+    ],
+    "text_blocks": [
+      {
+        "type": "paragraph",
+        "snippet": "The iPhone 16 has a more vibrant pink color than the iPhone 15. The iPhone 16 also features an action button, camera control, and fast charging. The iPhone 15 features a Dynamic Island and USB-C charging.",
+        "reference_indexes": [
+          0,
+          1,
+          4,
+          14,
+          13,
+          16,
+          17
+        ]
+      },
+      {
+        "type": "expandable",
+        "title": "Camera",
+        "text_blocks": [
+          {
+            "type": "paragraph",
+            "snippet": "The iPhone 16 and iPhone 15 have the same front and rear camera resolution, lens types, and digital zoom."
+          },
+          {
+            "type": "paragraph",
+            "snippet": "The iPhone 16 features an advanced dual-camera system with a TrueDepth camera. The iPhone 15 also features a dual-camera system, and its camera improvements are often made possible by software solutions like machine learning.",
+            "reference_indexes": [
+              5,
+              6,
+              12,
+              13
+            ]
+          },
+          {
+            "type": "comparison",
+            "product_labels": [
+              "Apple iPhone 16",
+              "Apple iPhone 15"
+            ],
+            "comparison": [
+              {
+                "feature": "Front camera resolution",
+                "values": [
+                  "12 MP",
+                  "12 MP"
+                ]
+              },
+              {
+                "feature": "Rear camera resolution",
+                "values": [
+                  "48 MP",
+                  "48 MP"
+                ]
+              },
+              {
+                "feature": "Lens type",
+                "values": [
+                  "Ultra wide angle, telephoto",
+                  "Ultra wide angle, telephoto"
+                ]
+              },
+              ...
+            ]
+          }
+        ]
+      },
+      {
+        "type": "expandable",
+        "title": "Design",
+        "text_blocks": [
+          {
+            "type": "paragraph",
+            "snippet": "The iPhone 16 and iPhone 15 have the same height, width, and depth.",
+            "reference_indexes": [
+              5,
+              6
+            ]
+          },
+          {
+            "type": "paragraph",
+            "snippet": "The iPhone 16 features a color-infused glass back in pink, teal, ultramarine, and black. The iPhone 15 also features a color-infused glass back in pink, blue, green, yellow, and black.",
+            "reference_indexes": [
+              5,
+              6
+            ]
+          },
+          {
+            "type": "comparison",
+            "product_labels": [
+              "Apple iPhone 16",
+              "Apple iPhone 15"
+            ],
+            "comparison": [
+              {
+                "feature": "Height",
+                "values": [
+                  "5.81 inches",
+                  "5.81 inches"
+                ]
+              },
+              {
+                "feature": "Width",
+                "values": [
+                  "2.82 inches",
+                  "2.82 inches"
+                ]
+              },
+              {
+                "feature": "Depth",
+                "values": [
+                  "0.31 inches",
+                  "0.31 inches"
+                ]
+              },
+              ...
+            ]
+          }
+        ]
+      },
+      ...
+    ],
+    "references": [
+      {
+        "title": "Pink Apple iPhone 16 Plus vs iPhone 15 Plus Unboxing ... - Instagram",
+        "link": "https://www.instagram.com/superscientific/reel/DAJ71gcSAKn/?hl=en#:~:text=The%20iPhone%2016%20definitely%20has%20the%20more,going%20for%20the%20iPhone%2016%20Pro%20Max?",
+        "snippet": "Sep 20, 2024 — The iPhone 16 definitely has the more vibrant pink color but the baby pink iPhone 15 also looks good. The Google Pixel...",
+        "source": "Instagram · superscientific",
+        "index": 0
+      },
+      {
+        "title": "Pink Apple iPhone 16 Plus vs iPhone 15 Plus Unboxing ... - Instagram",
+        "link": "https://www.instagram.com/superscientific/reel/DAJ71gcSAKn/#:~:text=15%20Plus%20Unboxing!-,Which%20smartphone%20has%20the%20better%20Pink?,I%20had%20to%20compare%20them.",
+        "snippet": "Sep 20, 2024 — Which smartphone has the better Pink? The iPhone 16 definitely has the more vibrant pink color but the baby pink iPhon...",
+        "source": "Instagram",
+        "index": 1
+      },
+      {
+        "title": "Iphone 16 vs 15 plus, which one to buy? : r/iphone15 - Reddit",
+        "link": "https://www.reddit.com/r/iphone15/comments/1gn3qng/iphone_16_vs_15_plus_which_one_to_buy/",
+        "snippet": "Nov 9, 2024 — The 16 was much more expensive. Besides, I also liked the colors of 15 more, the pink 16 made me feel nauseous (literal...",
+        "source": "Reddit · r/iphone15",
+        "index": 2
+      },
+      ...
+    ]
+  },
+  ...
+}
+Example with an extra request required
+Google can return AI Overview content through a separate request instead of directly in a response. In these cases we return page_token for the associated request and serpapi_link for the corresponding SerpApi search using our Google AI Overview API. The resulting JSON structure is the same as the above examples.
+
+The rendered HTML will show "Can't generate an AI overview right now. Try again later." — this is expected behaviour and can be ignored.
+
+page_token and serpapi_link will expire within 4 minutes of the search and should be used immediately.
+
+GET
+
+
+https://serpapi.com/search.json?q=how+does+art+work+in+android
+
+Code to integrate
+
+
+Ruby
+
+require "serpapi" 
+
+client = SerpApi::Client.new(
+  q: "how does art work in android",
+  api_key: "12b09a2d54fc83d5ef2150dae766c541f68c3698393dd3b62a77aa30035e0043"
+)
+
+results = client.search
+ai_overview = results[:ai_overview]
+
+JSON Example
+
+{
+  ...
+  "ai_overview": {
+    "page_token": "rWmjgXictZPdkqI4FMcv90nWvWBUtO0e7SpqKiBqHL8ifuENhRADgnwFjHo377JPtU-zAdtunXFqZ6t2U6UkOTkn55xf_t_-9N3A--u3P5w0jehrtcoYq5AwJD6uWOG-atJTYFW3oU8Ty_mSZT6WmKAAiKACTbRanO2unw06Ux93O-dBZ5GZq6m_VuSZ3e2I69WwRHwpoyXHl3BQOh2kp5JFJbGEXSlmm5d1loDu-Ox5BzRxrHY5BGGpuFEyNibFO57QcUerRpX_eb8_tfmiQis4MOZaRYsmSdzw-119WMH0uTKumnt-BPziQB9TRSFIKWYQKHeHyPtpBchAA0QuVj3-U6dFCAigcnHyEDgYTfXO3wJva9nKo80vt0IA2nc5kHzr0ZB5o9vNB4nLBIEuT6RRbF0uQXmQBgTD99JYTwTN9pGMv2rsh9gRIHsw0VbH2zo_Ku8vd65FVKCgqk14X8XqJuGfWjWheZeVWUsMO3F9uNTMZrpqiu3M7kCViaNa92W3mKJPBUGLviOktwihGwf2aD0-U1YZVOTalR7qQagW3VAJICJ51BcFfXROyXMnIPR4fWTA8t6OinJ6-YbFG6Nf3bSrw_KjXD5RYE6PqPBqzvuaD5g3VB0C4HAMQIacnkZ6jTk3tYsAyAO6LrsgBF8BWDPl5ulAcrmjcXlQKsD8hbGhvFKZChB_RQh4edSCHIJyXhAaMvWOXlHoP4z5T_Zl8ABXV1_EZXdAengab2akpZ2yaLJbOGc0vuIK95t_JTnrf0HqckHGb0iVx0hvBMkdVtz-JsiQC_KC1NMLQd4htaD6htS6QQp_GakMGnq7_AgpF-QeyFyQOdJ5gRTp3yP9rwRZkMWXz706sx35HruqlkeeU4u9ujwD09MzEeOTZcv0qCUc-3afvkZJSD4Zrv0q1_vpyS7FUi9kgh1iKqQOFrQoTFLKsJkI_IFEZnASRq6Hha3p-wJ1uFEIA4EG2PRwIriBMA_cFNuClpoppl9Kez8JJdF8YYd4pKvePGUG7O_Ugb8sPwf-4uwaT9vjYVSvRb10arx8Xs2i3uzZH_WV5SrIlL4xaTlKH4VqbwyDhOygbY1OmaqjxdA9U9dtmed2f6e7x3lnvWZav564IjvPxvt6013TcmO8Ao0BMpA8D7F23srrGvDnNivyopLeXWTQ6SxbC1SilmlgepDqm-Zn88ls1uubzab21CwMWXSQan8DmsQweA",
+    "serpapi_link": "https://serpapi.com/search.json?engine=google_ai_overview&page_token=rWmjgXictZPdkqI4FMcv90nWvWBUtO0e7SpqKiBqHL8ifuENhRADgnwFjHo377JPtU-zAdtunXFqZ6t2U6UkOTkn55xf_t_-9N3A--u3P5w0jehrtcoYq5AwJD6uWOG-atJTYFW3oU8Ty_mSZT6WmKAAiKACTbRanO2unw06Ux93O-dBZ5GZq6m_VuSZ3e2I69WwRHwpoyXHl3BQOh2kp5JFJbGEXSlmm5d1loDu-Ox5BzRxrHY5BGGpuFEyNibFO57QcUerRpX_eb8_tfmiQis4MOZaRYsmSdzw-119WMH0uTKumnt-BPziQB9TRSFIKWYQKHeHyPtpBchAA0QuVj3-U6dFCAigcnHyEDgYTfXO3wJva9nKo80vt0IA2nc5kHzr0ZB5o9vNB4nLBIEuT6RRbF0uQXmQBgTD99JYTwTN9pGMv2rsh9gRIHsw0VbH2zo_Ku8vd65FVKCgqk14X8XqJuGfWjWheZeVWUsMO3F9uNTMZrpqiu3M7kCViaNa92W3mKJPBUGLviOktwihGwf2aD0-U1YZVOTalR7qQagW3VAJICJ51BcFfXROyXMnIPR4fWTA8t6OinJ6-YbFG6Nf3bSrw_KjXD5RYE6PqPBqzvuaD5g3VB0C4HAMQIacnkZ6jTk3tYsAyAO6LrsgBF8BWDPl5ulAcrmjcXlQKsD8hbGhvFKZChB_RQh4edSCHIJyXhAaMvWOXlHoP4z5T_Zl8ABXV1_EZXdAengab2akpZ2yaLJbOGc0vuIK95t_JTnrf0HqckHGb0iVx0hvBMkdVtz-JsiQC_KC1NMLQd4htaD6htS6QQp_GakMGnq7_AgpF-QeyFyQOdJ5gRTp3yP9rwRZkMWXz706sx35HruqlkeeU4u9ujwD09MzEeOTZcv0qCUc-3afvkZJSD4Zrv0q1_vpyS7FUi9kgh1iKqQOFrQoTFLKsJkI_IFEZnASRq6Hha3p-wJ1uFEIA4EG2PRwIriBMA_cFNuClpoppl9Kez8JJdF8YYd4pKvePGUG7O_Ugb8sPwf-4uwaT9vjYVSvRb10arx8Xs2i3uzZH_WV5SrIlL4xaTlKH4VqbwyDhOygbY1OmaqjxdA9U9dtmed2f6e7x3lnvWZav564IjvPxvt6013TcmO8Ao0BMpA8D7F23srrGvDnNivyopLeXWTQ6SxbC1SilmlgepDqm-Zn88ls1uubzab21CwMWXSQan8DmsQweA"
+  },
+  ...
+}
+Example with error message
+GET
+
+
+https://serpapi.com/search.json?q=drop+shipping
+
+Code to integrate
+
+
+Ruby
+
+require "serpapi" 
+
+client = SerpApi::Client.new(
+  q: "drop shipping",
+  api_key: "12b09a2d54fc83d5ef2150dae766c541f68c3698393dd3b62a77aa30035e0043"
+)
+
+results = client.search
+ai_overview = results[:ai_overview]
+
+JSON Example
+
+{
+  ...
+  "ai_overview": {
+    "error": "Can't generate an AI overview right now. Try again later."
+  },
+  ...
+}
+JSON structure overview
+{
+  ...
+  "ai_overview": {
+    // When separate request is required for the AI Overview content
+    "page_token": "String - Token for the AI Overview block",
+    "serpapi_link": "String - URL to the corresponding SerpApi search",
+    // When the AI Overview block includes products
+    "products": [
+      {
+        "thumbnail": "String - URL to the product thumbnail image",
+        "title": "String - Title of the product",
+        "rating": "String - Product rating",
+        "reviews": "String - Number of reviews for the product",
+        "price": "String - Price of the product",
+        "extracted_price": "Number - Extracted price value from the product",
+        "installments": "String - Installment information for the product"
+      },
+      ...
+    ],
+    // When the AI Overview block is embeded in the search results
+    "text_blocks": [
+      {
+        "type": "String - Type of the text block. Can be 'heading', 'paragraph', 'list', 'expandable', or 'comparison'",
+        "snippet": "String - Snippet of the text block",
+        "snippet_latex": "Array of strings - LaTeX equations in the snippet",
+        "snippet_highlighted_words": "Array of strings - Highlighted words in the snippet",
+        "snippet_links": {
+          "text": "String - Text content of inline link",
+          "link": "String - URL of inline link",
+        },
+        "reference_indexes": "Array of integers - Indexes of the references in the root 'references' field",
+        "thumbnail": "String - URL to the thumbnail image",
+        "video": {
+          "link": "String - URL to the video",
+          "thumbnail": "String - URL to the thumbnail image",
+          "source": "String - Source of the video",
+          "date": "String - Date of the video"
+        },
+        // Only for 'list' type
+        "list": [
+          {
+            "title": "String - Title of the list item",
+            "link": "String - Link URL of the list item title",
+            "snippet": "String - Snippet of the list item",
+            "snippet_latex": "Array of strings - LaTeX equations in the snippet",
+            "reference_indexes": "Array of integers - Indexes of the references in the root 'references' field",
+            "thumbnail": "String - URL to the thumbnail image",
+            // Nested lists
+            "list": [
+              {
+                "snippet": "String - Snippet of the nested list item",
+                "reference_indexes": "Array of integers - Indexes of the references in the root 'references' field",
+              },
+              ...
+            ]
+          },
+          ...
+        ],
+        // Only for `table` type
+        "table": [
+          [
+            "String - Table cell snippet",
+            ...
+          ],
+          ...
+        ],
+        "detailed": [
+          [
+            {
+              "snippet": "String - Table cell snippet",
+              "snippet_latex": "Array of strings - LaTeX equations in the snippet"
+            },
+            ...
+          ],
+          ...
+        ],
+        "formatted": "Array or Object, depending on the structure of the table - Formatted table data",
+        // Only for 'expandable' type
+        "text_blocks": [
+          // The same structure as the parent 'text_blocks' field
+        ],
+        // Only for 'comparison' type
+        "product_labels": "Array of strings - Labels for the products being compared",
+        "comparison": [
+          {
+            "feature": "String - Feature being compared",
+            "values": [
+              "String - Value for the first product",
+              "String - Value for the second product"
+            ]
+          },
+          ...
+        ]
+      },
+      ...
+    ],
+    "thumbnail": "String - URL to the thumbnail image",
+    "references": [
+      {
+        "title": "String - Title of the reference",
+        "link": "String - URL to the reference",
+        "snippet": "String - Snippet of the reference",
+        "source": "String - Source of the reference",
+        "index": "Integer - Index of the reference"
+      },
+      ...
+    ],
+    "error": "String - Error message if the AI Overview results are not available",
+  },
+  ...
+}

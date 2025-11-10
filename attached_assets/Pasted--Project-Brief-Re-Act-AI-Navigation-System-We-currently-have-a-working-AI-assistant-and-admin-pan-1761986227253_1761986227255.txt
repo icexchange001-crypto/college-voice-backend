@@ -1,0 +1,128 @@
+✅ Project Brief: Re-Act AI Navigation System
+
+We currently have a working AI assistant and admin panel designed for a college environment.
+The assistant can answer student queries about class location, departments, and related institutional information.
+
+✅ Goal Now
+
+We are extending this system into a full, advanced multi-institution platform:
+
+College
+
+Hospital
+
+Court
+
+Each institution will have:
+
+Its own voice assistant page
+
+Its own demo data
+
+Its own mini-admin panel
+
+A different navigation experience          we alrady have college system fully working with assistant , panel etc just need it to connect to landing page and other court and hospital assistant we need to made all of them 
+
+✅ Primary Focus Feature
+
+For court (and later very large universities) we need an advanced indoor + outdoor AI navigation demo:
+
+System should identify building and room based on query
+Example: “Room 25 kaha hai?”
+
+AI returns navigation steps like:
+
+“Gate 1 se enter karein”
+
+“50 meter straight”
+
+“Right side Building A”
+
+“First floor, room 25”
+
+On screen:
+
+Google Map/embedded map
+
+Highlight court boundary
+
+Path line animation
+
+Building marker (custom overlay)
+
+Popup building photo
+
+Text + voice guidance
+
+We do not use QR system right now.
+Navigation logic will be demo-based, with manual mapping data added in backend.
+
+✅ Demo scope
+
+Only one court for now (example: Kaithal Court)
+
+We will manually:
+
+Highlight court area on map
+
+Mark Gate-1
+
+Mark one building
+
+Assign rooms to that building
+
+Later we will scale this system.
+
+✅ UI & Flow
+
+Landing page with:
+
+Re-Act explanation
+
+Problem & vision
+
+Features
+
+Buttons for 3 demos: College / Hospital / Court
+
+When user clicks:
+
+Load respective assistant
+
+For court assistant, show map + voice path instructions + building photo popup + glowing path
+
+✅ Tech Notes
+
+Google Maps embed
+
+Custom map overlay markers (manual for demo)
+
+All data for buildings/rooms will be stored in our admin panel
+
+Voice assistant will fetch from backend and guide user
+
+🎯 Your first task
+
+Build the Landing Page first.
+After landing page, we will start connecting dynamic demos & mapping logic.
+
+Landing page must include:
+
+Hero section
+
+Vision
+
+Problem
+
+Solution
+
+Coming features
+
+Demo buttons for: College, Hospital, Court
+
+Contact / Beta Register
+
+Smooth modern UI
+
+Focus now: Build landing page with navigation buttons.
+We will connect other modules next.

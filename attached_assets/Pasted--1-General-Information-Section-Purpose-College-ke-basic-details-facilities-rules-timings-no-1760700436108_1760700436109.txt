@@ -1,0 +1,117 @@
+🧾 1. General Information Section
+
+Purpose: College ke basic details, facilities, rules, timings, notices, etc.
+
+Fields:
+
+Field	Type	Description
+Title*	Text	e.g. “Library Timings”, “Dress Code Policy”
+Category	Text / Dropdown	e.g. Facilities, Rules, Timings, Notice
+Content*	Long Text	Full detail description
+Tags	Text	Keywords (e.g. “library, study, hours”)
+Added By	Auto	Admin name / ID
+Last Updated	Auto Date	Date & Time
+Visible To	Dropdown	All Students / Teachers / Staff (optional)
+
+✅ AI Example Prompt:
+
+“Add info that hostel closes at 9 PM and gate opens at 6 AM.”
+AI Output → fills all above fields automatically.
+
+👨‍🏫 2. Staff Section
+
+Purpose: Teacher aur non-teaching staff details manage karna.
+
+Fields:
+
+Field	Type	Description
+Full Name*	Text	e.g. Rakesh Verma
+Department*	Dropdown / Text	e.g. Physics
+Designation*	Text	e.g. Assistant Professor, HOD
+Subjects / Area of Expertise	Text	e.g. Mechanics, Thermodynamics
+Qualification	Text	e.g. M.Sc, Ph.D
+Experience (Years)	Number	e.g. 8
+Email	Text	Official email
+Phone Number	Text	Optional
+Office Location / Room No.	Text	Optional
+Photo URL	File / URL	Optional
+Status	Dropdown	Active / On Leave / Retired
+
+✅ AI Example Prompt:
+
+“Add new teacher Rakesh Verma in Physics department, teaches Mechanics, has 8 years of experience.”
+AI fills above table automatically.
+
+🎓 3. Courses Section
+
+Purpose: College ke sabhi academic courses ki detail rakhna.
+
+Fields:
+
+Field	Type	Description
+Course Name*	Text	e.g. B.Sc Computer Science
+Program Type*	Dropdown	UG / PG / Diploma / Certificate
+Department*	Dropdown	e.g. Computer Science
+Duration*	Text	e.g. 3 Years
+Total Semesters	Number	e.g. 6
+Annual / Semester Fees	Text	e.g. ₹25,000 per semester
+Eligibility Criteria	Long Text	e.g. 12th Pass with Science stream
+Admission Process	Long Text	e.g. Merit-based or Entrance Exam
+Syllabus / Curriculum Link	URL	Optional
+Intake Capacity	Number	e.g. 60 Students
+Mode of Study	Dropdown	Regular / Distance / Online
+Last Updated	Auto Date	Auto generated
+
+✅ AI Example Prompt:
+
+“Add B.Sc Computer Science, a 3-year UG course under Computer Science department, with 6 semesters and ₹25,000 per semester fee.”
+AI → fills all above fields.
+
+🎉 4. Events Section
+
+Purpose: College events, functions, competitions, etc.
+
+Fields:
+
+Field	Type	Description
+Event Title*	Text	e.g. Annual Sports Meet
+Category	Dropdown	Cultural / Academic / Sports / Technical
+Date*	Date	Event date
+Time	Time	Optional
+Venue	Text	e.g. College Ground
+Organized By	Text	e.g. Sports Department
+Description*	Long Text	Full details of event
+Chief Guest / Special Guest	Text	Optional
+Registration Required?	Boolean	Yes / No
+Registration Link	URL	Optional
+Poster / Banner URL	File / URL	Optional
+Status	Dropdown	Upcoming / Ongoing / Completed
+Last Updated	Auto Date	Auto generated
+
+✅ AI Example Prompt:
+
+“Add annual sports meet organized by Sports Department on 10th December 2025 at College Ground.”
+AI auto fills everything.
+
+🧠 5. Implementation Idea (Same for All Sections)
+
+Each section me ye 2 options honge:
+
+[➕ Add Information]
+     ▸ Manual Mode
+     ▸ AI Mode (🧠 Smart Add)
+
+
+Manual Mode: Admin manually fills the form fields.
+
+AI Mode: Admin likhta hai natural sentence → AI auto fills form → Confirm to Add.
+
+📊 6. Table Display Example (Uniform Format)
+Courses Example:
+Course Name	Program	Duration	Fee	Department	Actions
+B.Sc Computer Science	UG	3 Years	₹25,000/Sem	Computer Science	✏️ / 🗑
+Staff Example:
+Name	Dept	Role	Experience	Contact	Actions
+Rakesh Verma	Physics	Asst. Prof.	8 Years	9876xxxx	✏️ / 🗑
+
+Aise structure me AI ko har field samajhne ke liye training prompt simple hoga, aur backend schema bhi clean banega.

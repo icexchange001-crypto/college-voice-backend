@@ -1,0 +1,28 @@
+Part 8 — Technical & Digital Resources (R.K.S.D. (P.G.) College, Kaithal)
+Overview (short)
+RKSD College maintains a modern digital ecosystem centered on an in-house ERP portal, web OPAC for the library, campus Wi-Fi & smart classrooms, online fee payment, and an institutional e-repository / e-resources (NLIST/NDL links). The ERP also hosts student/employee logins, library records, fee & bus pass applications and attendance/records modules. 
+1) Official ERP / Student Portal
+ERP URL / Student Login: https://erp.rksdcollege.com
+— Student and Employee login, Search Library Books, Apply for Bus Pass, Pay College Fee Online, Alumni Registration etc. 
+ERP Capabilities (documented): Student/employee database, library integration, attendance & exam records, alumni, fee modules — screenshots and description published in the college AQAR/ERP PDF. (ERP screenshots PDF). 
+2) Online Fee Payment
+Online fee portal (college): https://online.rksdcollege.com/Fee/PayFee
+— Students can pay fees online; after payment a form is downloadable which must be submitted to college office. ERP home also links to "Pay College Fee Online". 
+3) Library OPAC & E-Resources / E-Repository
+Web OPAC / SearchBook: Library OPAC available (SearchBook — erp.rksdcollege.com/Admin/Library/SearchBook) and campus web OPAC mirrors (campus OPAC pages). Students can search holdings online. 
+E-Resources & Institutional Repository: College provides e-resources via N-LIST / NDL style access and hosts an institutional repository / teacher e-content (AQAR / Library pages). 
+4) Attendance / Biometric / Exam Records
+Attendance module: ERP contains attendance/recording modules (shown in ERP screenshots). For related institutes in the RKSD group (e.g., Pharmacy), a Biometric Attendance System is explicitly mentioned — indicating use or readiness for biometric integration across campus systems. Recommend confirming exact hardware (fingerprint/face) with admin if needed. 
+5) Learning Management / E-Learning
+LMS status: RKSD publishes e-content & institutional repository (teacher-made content, uploaded resources). There is no separate branded LMS (like Moodle/Canvas) publicly advertised — learning content appears to be shared via the institutional repository / ERP / library links. If you need a full LMS entry, mark as “Institutional e-repository; LMS = Not publicly listed (confirm with admin)”. 
+6) Smart Classrooms, IT Labs & Connectivity
+Smart Classrooms / Wi-Fi: College lists 103 Wi-Fi enabled classrooms including 13 smart classrooms with ICT tools; campus-wide free Wi-Fi and computer labs support teaching. (See infrastructure & prospectus pages.) 
+Computer Labs: Two (fully AC) computer labs with up-to-date systems & software (used for practicals). 
+7) Security, Backups & IT Support
+Data & backup: ERP screenshots and AQAR describe centralized record keeping (student/employee/library). Specific backup/DR policy isn’t published publicly — recommend asking the college IT/admin for details if required. 
+8) Useful Links (direct)
+ERP / Student Login (home): https://erp.rksdcollege.com
+Library OPAC / SearchBook: https://erp.rksdcollege.com/Admin/Library/SearchBook
+Online Fee Payment (PayFee): https://online.rksdcollege.com/Fee/PayFee
+Library Resources page (college site): https://rksdcollege.ac.in/library-resources/
+
