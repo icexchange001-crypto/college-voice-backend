@@ -948,25 +948,24 @@ export default function Landing() {
               <div className="relative" style={{ paddingTop: "48%" }}>
                 {/* Video with thumbnail */}
                 <video
-                  id="team-video"
-                  src="/images/video1.mp4"
-                  poster="/images/video-thumbnail.jpg" // Thumbnail before play
-                  className="absolute top-0 left-0 w-full h-full object-cover cursor-pointer"
-                  onClick={() => {
-                    const video = document.getElementById(
-                      "team-video",
-                    ) as HTMLVideoElement;
-                    if (video) {
-                      if (isVideoPlaying) {
-                        video.pause();
-                        setIsVideoPlaying(false);
-                      } else {
-                        video.play();
-                        setIsVideoPlaying(true);
-                      }
-                    }
-                  }}
-                />
+  id="team-video"
+  src="https://www.dropbox.com/scl/fi/mckq302tpk998nldupjxq/lv_0_20251110112116.mp4?rlkey=we4azsdir1soa5jkfepweb0qk&st=w857st2u&raw=1"
+  poster="/images/video-thumbnail.jpg" // Thumbnail before play
+  className="absolute top-0 left-0 w-full h-full object-cover cursor-pointer"
+  onClick={() => {
+    const video = document.getElementById("team-video") as HTMLVideoElement;
+    if (video) {
+      if (isVideoPlaying) {
+        video.pause();
+        setIsVideoPlaying(false);
+      } else {
+        video.play();
+        setIsVideoPlaying(true);
+      }
+    }
+  }}
+/>
+
                 {/* Play Button Overlay */}
                 {!isVideoPlaying && (
                   <div
