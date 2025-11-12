@@ -33,7 +33,6 @@ const allowedOriginPatterns = [
 
 app.use(cors({
   origin: (origin, callback) => {
-    // allow requests with no origin (mobile apps, curl, same-origin)
     if (!origin) return callback(null, true);
 
     if (allowedOrigins.includes(origin)) return callback(null, true);
@@ -41,7 +40,6 @@ app.use(cors({
     const isPatternMatch = allowedOriginPatterns.some(pattern => pattern.test(origin));
     if (isPatternMatch) return callback(null, true);
 
-    // allow all origins in development
     if (process.env.NODE_ENV === 'development') return callback(null, true);
 
     console.warn('CORS: Rejected origin:', origin);
@@ -85,6 +83,13 @@ app.use((req, res, next) => {
 });
 
 /**
+ * 🔹 LIGHTWEIGHT /ping ENDPOINT (for Render Uptime)
+ */
+app.get('/ping', (_req, res) => {
+  res.status(200).send('OK');
+});
+
+/**
  * 🔹 MAIN ASYNC SETUP
  */
 (async () => {
@@ -103,7 +108,7 @@ app.use((req, res, next) => {
     const status = err.status || err.statusCode || 500;
     const message = err.message || "Internal Server Error";
 
-    console.error('Error:', err); // log for debugging
+    console.error('Error:', err);
     res.status(status).json({ message });
   });
 
