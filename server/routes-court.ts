@@ -439,129 +439,104 @@ export async function registerCourtRoutes(app: Express) {
     }
   });
 
-  // OpenAI TTS Endpoint for Court Assistant (Fallback with "ash" voice)
-  app.post("/api/court/tts-openai", async (req, res) => {
-    try {
-      const { text } = ttsSchema.parse(req.body);
+    // OpenAI TTS Endpoint for Court Assistant (Fallback with "ash" voice)
+app.post("/api/court/tts-openai", async (req, res) => {
+  try {
+    const { text } = ttsSchema.parse(req.body);
 
-      if (!text || text.trim().length === 0) {
-        return res.status(400).json({
-          message: "Text cannot be empty",
-          error: "EMPTY_TEXT"
-        });
-      }
-
-      console.log(`🔊 Court TTS Request (OpenAI - ash voice): ${text.substring(0, 50)}...`);
-
-      const openaiApiKey = process.env.OPENAI_API_KEY;
-      
-      if (!openaiApiKey) {
-        console.error('❌ OpenAI API key not configured');
-        return res.status(500).json({
-          message: "OpenAI TTS service not configured",
-          error: "OPENAI_KEY_MISSING"
-        });
-      }
-
-      // Comprehensive text cleaning for TTS - remove ALL markdown and special formatting
-      const cleanTextForSpeech = (text: string) => {
-        return text
-          .replace(/\|/g, ' ')
-          .replace(/---+/g, '. ')
-          .replace(/#{1,6}\s+/g, '')
-          // Remove triple asterisks first (before double)
-          .replace(/\*\*\*(.*?)\*\*\*/g, '$1')
-          // Remove double asterisks (bold)
-          .replace(/\*\*(.*?)\*\*/g, '$1')
-          // Remove single asterisks (italic)
-          .replace(/\*(.*?)\*/g, '$1')
-          // Remove underscores (bold/italic)
-          .replace(/__(.*?)__/g, '$1')
-          .replace(/_(.*?)_/g, '$1')
-          // Remove inline code
-          .replace(/`(.*?)`/g, '$1')
-          // Remove markdown links [text](url) - keep only text
-          .replace(/\[(.*?)\]\(.*?\)/g, '$1')
-          // Remove standalone URLs in parentheses
-          .replace(/\(https?:\/\/[^\)]+\)/g, '')
-          // Remove emojis
-          .replace(/📊|📌|🎓|⏰|📞|⚖️|✅|❌|🔊|🎯|📧|📍/g, '')
-          // Clean up multiple spaces
-          .replace(/\s+/g, ' ')
-          .trim();
-      };
-
-      const cleanedText = cleanTextForSpeech(text);
-      
-      // Apply text normalization for proper pronunciation of times, phone numbers, emails, etc.
-      const normalizedText = normalizeTextForTTS(cleanedText);
-
-      console.log(`Court TTS (OpenAI): Processing text (${normalizedText.length} characters)...`);
-      console.log(`Court TTS (OpenAI): Normalized text preview: "${normalizedText.substring(0, 100)}..."`);
-
-      // OpenAI TTS has a 4096 character limit
-      const MAX_CHAR_LIMIT = 4000;
-      let finalText = normalizedText;
-      
-      if (normalizedText.length > MAX_CHAR_LIMIT) {
-        console.warn(`⚠️ Court TTS (OpenAI): Text exceeds ${MAX_CHAR_LIMIT} chars. Truncating...`);
-        
-        finalText = normalizedText.substring(0, MAX_CHAR_LIMIT);
-        const lastPeriod = finalText.lastIndexOf('.');
-        const lastQuestion = finalText.lastIndexOf('?');
-        const lastExclamation = finalText.lastIndexOf('!');
-        
-        const lastSentenceEnd = Math.max(lastPeriod, lastQuestion, lastExclamation);
-        if (lastSentenceEnd > MAX_CHAR_LIMIT * 0.8) {
-          finalText = normalizedText.substring(0, lastSentenceEnd + 1);
-        }
-      }
-
-      // OpenAI TTS API Call - using "ash" voice for natural, smooth speech
-      const response = await fetch('https://api.openai.com/v1/audio/speech', {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${openaiApiKey}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          model: 'tts-1',
-          input: finalText,
-          voice: 'ash',
-          speed: 1.0
-        })
-      });
-
-      if (!response.ok) {
-        const errorText = await response.text();
-        console.error(`❌ OpenAI TTS failed (${response.status}):`, errorText);
-        throw new Error(`OpenAI TTS API error (${response.status})`);
-      }
-
-      const audioBuffer = await response.arrayBuffer();
-      const finalAudio = Buffer.from(audioBuffer);
-
-      console.log(`✅ Court TTS (OpenAI): Complete! Generated ${finalAudio.length} bytes with ash voice`);
-
-      res.set({
-        'Content-Type': 'audio/mpeg',
-        'Content-Length': finalAudio.length,
-        'X-TTS-Provider': 'openai',
-        'X-TTS-Voice': 'ash',
-        'X-TTS-Mode': 'continuous'
-      });
-
-      res.send(finalAudio);
-
-    } catch (error: any) {
-      console.error('❌ Court TTS (OpenAI) error:', error);
-      res.status(500).json({
-        message: "OpenAI TTS generation failed",
-        error: error.message
+    if (!text || text.trim().length === 0) {
+      return res.status(400).json({
+        message: "Text cannot be empty",
+        error: "EMPTY_TEXT"
       });
     }
-  });
+
+    console.log(`🔊 Court TTS Request (OpenAI - ash voice): ${text.substring(0, 50)}...`);
+
+    const openaiApiKey = process.env.OPENAI_API_KEY;
+    
+    if (!openaiApiKey) {
+      console.error('❌ OpenAI API key not configured');
+      return res.status(500).json({
+        message: "OpenAI TTS service not configured",
+        error: "OPENAI_KEY_MISSING"
+      });
+    }
+
+    // ✅ CLEANER FUNCTION MUST BE HERE
+    const cleanTextForSpeech = (text: string) => {
+      return text
+        .replace(/\|/g, ' ')
+        .replace(/---+/g, '. ')
+        .replace(/#{1,6}\s+/g, '')
+        .replace(/\*\*\*(.*?)\*\*\*/g, '$1')
+        .replace(/\*\*(.*?)\*\*/g, '$1')
+        .replace(/\*(.*?)\*/g, '$1')
+        .replace(/__(.*?)__/g, '$1')
+        .replace(/_(.*?)_/g, '$1')
+        .replace(/`(.*?)`/g, '$1')
+        .replace(/\[(.*?)\]\(.*?\)/g, '$1')
+        .replace(/\(https?:\/\/[^\)]+\)/g, '')
+        .replace(/📊|📌|🎓|⏰|📞|⚖️|✅|❌|🔊|🎯|📧|📍/g, '')
+        .replace(/\s+/g, ' ')
+        .trim();
+    };
+
+    // ✅ NOW THIS WORKS (no error)
+    const cleanedText = cleanTextForSpeech(text);
+    const normalizedText = normalizeTextForTTS(cleanedText);
+
+    const MAX_CHAR_LIMIT = 4000;
+    let finalText = normalizedText;
+
+    if (normalizedText.length > MAX_CHAR_LIMIT) {
+      finalText = normalizedText.substring(0, MAX_CHAR_LIMIT);
+    }
+
+    const response = await fetch('https://api.openai.com/v1/audio/speech', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${openaiApiKey}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        model: 'tts-1',
+        input: finalText,
+        voice: 'ash',
+        speed: 1.0
+      })
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error(`❌ OpenAI TTS failed (${response.status}):`, errorText);
+      throw new Error(`OpenAI TTS API error (${response.status})`);
+    }
+
+    const audioBuffer = await response.arrayBuffer();
+    const finalAudio = Buffer.from(audioBuffer);
+
+    res.set({
+      'Content-Type': 'audio/mpeg',
+      'Content-Length': finalAudio.length,
+      'X-TTS-Provider': 'openai',
+      'X-TTS-Voice': 'ash',
+      'X-TTS-Mode': 'continuous'
+    });
+
+    res.send(finalAudio);
+
+  } catch (error: any) {
+    console.error('❌ Court TTS (OpenAI) error:', error);
+    res.status(500).json({
+      message: "OpenAI TTS generation failed",
+      error: error.message
+    });
+  }
+});
+
 }
+
 
 function buildCourtSystemPrompt(contextData: any): string {
   const { rooms, buildings, staff, files, timings, settings, buildingImages } = contextData;
