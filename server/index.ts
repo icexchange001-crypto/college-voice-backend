@@ -15,19 +15,19 @@ const app = express();
  * Hostinger frontend + Render backend safe
  */
 const allowedOrigins = [
-  // 👇 YOUR NEW FRONTEND (Render)
-  "https://wayfinder-ai-jdr7.onrender.com",
-  "http://wayfinder-ai-jdr7.onrender.com",
-
-  // 👇 Local development
-  "http://localhost:3000",
-  "http://localhost:5000",
-  "http://127.0.0.1:5000",
-  "http://127.0.0.1:3000"
+  'http://silver-coyote-528857.hostingersite.com',
+  'https://silver-coyote-528857.hostingersite.com',
+  'https://wayfinder-ai-jdr7.onrender.com',
+  'http://localhost:5000',
+  'http://localhost:3000',
+  'http://127.0.0.1:5000',
+  ...(process.env.ALLOWED_ORIGINS ? process.env.ALLOWED_ORIGINS.split(',') : [])
 ];
 
+
+// Regex patterns to match dynamic origins (subdomains, ports)
 const allowedOriginPatterns = [
-  /^https?:\/\/wayfinder-ai-jdr7\.onrender\.com\/?$/, // 👈 NEW domain
+  /^https?:\/\/(.*\.)?hostingersite\.com(:\d+)?\/?$/,
   /^https?:\/\/localhost(:\d+)?$/,
   /^https?:\/\/127\.0\.0\.1(:\d+)?$/
 ];
@@ -36,24 +36,21 @@ app.use(cors({
   origin: (origin, callback) => {
     if (!origin) return callback(null, true);
 
-    if (allowedOrigins.includes(origin)) {
-      return callback(null, true);
-    }
+    if (allowedOrigins.includes(origin)) return callback(null, true);
 
     const isPatternMatch = allowedOriginPatterns.some(pattern => pattern.test(origin));
-    if (isPatternMatch) {
-      return callback(null, true);
-    }
+    if (isPatternMatch) return callback(null, true);
 
-    console.warn("CORS: Rejected origin:", origin);
-    return callback(new Error("Not allowed by CORS"));
+    if (process.env.NODE_ENV === 'development') return callback(null, true);
+
+    console.warn('CORS: Rejected origin:', origin);
+    return callback(new Error('Not allowed by CORS'));
   },
   credentials: true,
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
-  optionsSuccessStatus: 200,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
+  optionsSuccessStatus: 200
 }));
-
 
 // Parse JSON and URL-encoded data
 app.use(express.json());
